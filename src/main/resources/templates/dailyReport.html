@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}">
+
+<head>
+<meta charset="UTF-8">
+<title>日報</title>
+</head>
+<body>
+
+	<h2>日報</h2>
+	<p th:text="${session.date}"></p>
+	
+	<form method="post" th:action="@{/doDailyReport}"
+		th:object="${dailyReportForm}">
+		<table>
+			<tr>
+				<th>やったこと</th>
+				<th>評価</th>
+				<th>改善点</th>
+			</tr>
+			<tr>
+				<td><input type="text" name="activity"
+					th:field="*{doneThings.things}" /></td>
+				<td><select name="completeness"
+					th:field="*{doneThings.completeness}">
+						<option value="〇">〇</option>
+						<option value="△">△</option>
+						<option value="✕">✕</option>
+				</select></td>
+				<td><input type="text" name="improvement"
+					th:field="*{doneThings.improvement}" /></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="activity"
+					th:field="*{doneThings.things}" /></td>
+				<td><select name="completeness"
+					th:field="*{doneThings.completeness}">
+						<option value="〇">〇</option>
+						<option value="△">△</option>
+						<option value="✕">✕</option>
+				</select></td>
+				<td><input type="text" name="improvement"
+					th:field="*{doneThings.improvement}" /></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="things"
+					th:field="*{doneThings.things}" /></td>
+				<td><select name="completeness"
+					th:field="*{doneThings.completeness}">
+						<option value="〇">〇</option>
+						<option value="△">△</option>
+						<option value="✕">✕</option>
+				</select></td>
+				<td><input type="text" name="improvement"
+					th:field="*{doneThings.improvement}" /></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="things"
+					th:field="*{doneThings.things}" /></td>
+				<td><select name="completeness"
+					th:field="*{doneThings.completeness}">
+						<option value="〇">〇</option>
+						<option value="△">△</option>
+						<option value="✕">✕</option>
+				</select></td>
+				<td><input type="text" name="improvement"
+					th:field="*{doneThings.improvement}" /></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="things"
+					th:field="*{doneThings.things}" /></td>
+				<td><select name="completeness"
+					th:field="*{doneThings.completeness}">
+						<option value="〇">〇</option>
+						<option value="△">△</option>
+						<option value="✕">✕</option>
+				</select></td>
+				<td><input type="text" name="improvement"
+					th:field="*{doneThings.improvement}" /></td>
+			</tr>
+		</table><br>
+
+		<label>所感(400文字以内)</label><br>
+		<textarea name="impression" cols="50" rows="8"
+			th:field="*{reflection}"></textarea>
+		<p> <input name="submit" type="submit" value="提出"></p>
+		
+		
+		<p class="return"><a th:href="@{/select}">戻る</a></p>
+	</form>
+	
+
+</body>
+</html>

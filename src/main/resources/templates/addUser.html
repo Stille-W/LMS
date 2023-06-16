@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/addUser.css}" rel="stylesheet" type="text/css" />
+<title>AddUser</title>
+</head>
+<body>
+
+<form th:action="@{/adduser}" method="post" th:object="${userSigninForm}">
+<div class="title">
+	<div class="formTitle">新規登録</div>
+	<div class="home">
+		<a th:href="@{/index}">
+			<img th:src="@{/img/home.png}" alt="">
+		</a>
+	</div>
+</div>
+
+<div class="addForm">
+	<div class="inputForm">
+		<span>Username:</span>
+		<input type="text" name="username" th:field="*{userName}"/>
+		<p></p>
+		<span class="error" th:errors="*{userName}"></span><br>
+		<span>Fullname:</span>
+		<input type="text" name="fullname" th:field="*{fullName}"/>
+		<p></p>
+		<span class="error" th:errors="*{fullName}"></span><br>
+		<span>Password:</span>
+		<input type="password" name="password" th:field="*{password}"/>
+		<p></p>
+		<span class="error" th:errors="*{password}"></span><br>
+		<span class="error" th:if="${dup}" th:text="${dup}"></span><br>
+	</div>	
+	<input class="submit" type="submit" value="登録"/>
+</div>	
+</form>
+
+</body>
+</html>

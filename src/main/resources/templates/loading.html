@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		if($("input").val()=="dailyDone"){
+			alert("JOB DONE!");
+			window.location.href = "./select";
+		} else if ($("input").val()=="attendance"){
+			alert("本日も出勤お疲れ様です");
+			window.location.href = "./findAllAttendance";
+		}
+		
+		
+	})
+</script>
+<body>
+	<input type="hidden" th:value="${stat}"/>
+	please waiting......
+</body>
+</html>

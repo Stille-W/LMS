@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}">
+<head>
+<meta charset="UTF-8">
+<title>メニュー</title>
+</head>
+<body>
+	<h2>メニュー</h2>
+	<div class="select">
+
+		<p>
+			<a th:href="@{/dailyReport}">日報</a>
+		</p>
+
+		<p>
+			<a th:href="@{/attendanceSystem}">勤怠登録</a>
+		</p>
+		
+		<p>
+			<a th:href="@{/mail}">メールテンプレート</a>
+		</p>
+
+		<p>
+			<a th:href="@{/logout}">ログアウト</a>
+		</p>
+	</div>
+</body>
+</html>

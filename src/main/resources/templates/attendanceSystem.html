@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}">
+
+<head>
+<meta charset="UTF-8">
+<title>勤怠登録</title>
+</head>
+<body>
+	<h2>勤怠登録</h2>
+	<div class="attendance">
+	<form method="post" th:action="@{/attendanceRegister}">
+		<h4>【出勤登録】</h4>
+		<input type="submit" value="出勤登録" onClick="Check();" />
+	</form><br>
+
+	
+	<form method="post" th:action="@{/complaints}">
+		<h4>【愚痴相談登録】</h4>
+		開始時間◆<input type="time" value="18:30" name="startTime" />
+		終了時間◆<input type="time" value="19:00" name="endTime" />
+		<br />
+		開催場所◆<input type="text" name="place" />
+		<br />
+		<input type="submit"value="登録" />
+	</form>
+	
+	<div class="form">
+		<h4>【手動入力】</h4>
+		<a th:href="@{/manualInput}">勤怠情報入力</a>
+		<br>
+		<a th:href="@{/manualDelete}">勤怠情報削除</a>
+		<p>
+			<a th:href="@{/findAllAttendance}">勤怠情報一覧</a>
+		</p>
+		<p>
+			<a th:href="@{/select}">戻る</a>
+		</p>
+	</div>	
+	</div>
+</body>
+</html>

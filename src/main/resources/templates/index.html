@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/index.css}" rel="stylesheet" type="text/css" />
+<title>GoodSunLMS ログイン</title>
+
+</head>
+<body>
+<div class="bg">
+	<div class="login">
+		<form method="post" th:action="@{/login}" th:object="${loginForm}">
+		<div class="form">
+			<p>UserName:</p>
+			<a th:href="@{/adduser}" ><div class="new">新規登録</div></a>
+			<input type="text" th:field="*{userName}"/>
+			<span class="error" th:errors="*{userName}"></span>
+			<p>Password:</p>
+			<input type="password" th:field="*{password}" />
+			<span class="error" th:errors="*{password}"></span>
+			<span class="error" th:if="${errMessage}" th:text="${errMessage}"></span>
+		</div>			
+			<input class="submit" type="submit" value="ログイン" />
+		</form>
+</div>
+</div>
+
+</body>
+</html>

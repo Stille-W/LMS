@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+#header {
+ background-color:#ffdead;
+ height: 80px;
+ display:flex;
+ justify-content:flex-end;
+ align-items:flex-end;
+ width: 100%;
+ position: fixed;
+ top: 0px;
+ background-image: url();
+ background-size: cover;
+ background-position: 50% 25%; /* 横 縦 */
+ justify-content: space-between;
+}
+
+#container{
+	background-image: url();
+	background-size: cover;
+}
+
+article{
+ display:flex;
+ margin-top: 80px;
+ width: 100%;
+ min-height: 100vh;
+}
+
+body{
+	margin: 0px;
+}
+
+.select{
+ margin-left: 10px;
+ margin-right:10px;
+ margin-top: 50px;
+}
+
+.list{
+ margin-left: 10%;
+ margin-right:20%;
+ margin-top: 50px;
+}
+
+#table{
+ margin-top: 50px;
+}
+
+h2{
+ white-space: nowrap;
+ padding-left: 3%
+}
+
+#footer {
+ background-color: #ffdead;
+ height: 80px;
+ 
+}
+
+
+.attendance{
+ margin:0 auto;
+}
+
+form, .form{
+ margin:0 auto;
+	
+	/*formを丁度良い場所に置きたい*/
+	padding:50px;
+}
+
+td {
+	text-align: center;
+}
+
+
+
+.return{
+        margin-top: 100px;
+    }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}">
+<head>
+<meta charset="UTF-8">
+
+<title>勤怠情報一覧</title>
+</head>
+<body>
+ 	<h2>勤怠情報一覧</h2>
+
+	<div class="list">
+	
+	<form th:action="@{/findByMonth}" method="get">
+			月別検索◆<input type="month" value="2023-06" name="month" />
+			<input type="submit" value="検索"/>
+	</form>
+	
+		<table border=1>
+			<tr>
+				<th colspan="2">日付</th>
+				<th>開始</th>
+				<th>終了</th>
+				<th>区分</th>
+				<th>勤務時間</th>
+				<th>プロジェクト</th>
+				<th>場所</th>
+				<th>備考</th>
+			</tr>
+			<tr th:each="attendance: ${attendance}">
+				<td th:text="${#dates.format(attendance.date, 'MM/dd')}"></td>
+				<td th:text="${#dates.format(attendance.date, 'E')}"></td>
+				<td th:text="${attendance.startTime}"></td>
+				<td th:text="${attendance.endTime}"></td>
+				<td th:text="${attendance.division}"></td>
+				<td th:text="${attendance.workHours}"></td>
+				<td th:text="${attendance.project}"></td>
+				<td th:text="${attendance.place}"></td>
+				<td th:text="${attendance.remarks}"></td>
+			</tr>
+		</table>
+
+
+		<div class="form">
+			<input id="genMM" type="month" value="2023-06" name="month" />
+			<button id="genBtn" type="button" th:onclick="gen(this.getAttribute('month'))"
+				th:text="月報生成" th:month="06"></button>
+		</div>
+
+
+		<p class="return">
+			<a th:href="@{/attendanceSystem}">戻る</a>
+
+		</p>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script th:src="@{/js/findAllAttendance.js}" type="text/javascript"></script>
+</body>
+</html>
