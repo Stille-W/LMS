@@ -4,92 +4,110 @@
 
 <head>
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <title>日報</title>
 </head>
 <body>
 
-	<h2>日報</h2>
-	<p th:text="${session.date}"></p>
-	
-	<form method="post" th:action="@{/doDailyReport}"
-		th:object="${dailyReportForm}">
-		<table>
-			<tr>
-				<th>やったこと</th>
-				<th>評価</th>
-				<th>改善点</th>
-			</tr>
-			<tr>
-				<td><input type="text" name="activity"
-					th:field="*{doneThings.things}" /></td>
-				<td><select name="completeness"
-					th:field="*{doneThings.completeness}">
-						<option value="〇">〇</option>
-						<option value="△">△</option>
-						<option value="✕">✕</option>
-				</select></td>
-				<td><input type="text" name="improvement"
-					th:field="*{doneThings.improvement}" /></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="activity"
-					th:field="*{doneThings.things}" /></td>
-				<td><select name="completeness"
-					th:field="*{doneThings.completeness}">
-						<option value="〇">〇</option>
-						<option value="△">△</option>
-						<option value="✕">✕</option>
-				</select></td>
-				<td><input type="text" name="improvement"
-					th:field="*{doneThings.improvement}" /></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="things"
-					th:field="*{doneThings.things}" /></td>
-				<td><select name="completeness"
-					th:field="*{doneThings.completeness}">
-						<option value="〇">〇</option>
-						<option value="△">△</option>
-						<option value="✕">✕</option>
-				</select></td>
-				<td><input type="text" name="improvement"
-					th:field="*{doneThings.improvement}" /></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="things"
-					th:field="*{doneThings.things}" /></td>
-				<td><select name="completeness"
-					th:field="*{doneThings.completeness}">
-						<option value="〇">〇</option>
-						<option value="△">△</option>
-						<option value="✕">✕</option>
-				</select></td>
-				<td><input type="text" name="improvement"
-					th:field="*{doneThings.improvement}" /></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="things"
-					th:field="*{doneThings.things}" /></td>
-				<td><select name="completeness"
-					th:field="*{doneThings.completeness}">
-						<option value="〇">〇</option>
-						<option value="△">△</option>
-						<option value="✕">✕</option>
-				</select></td>
-				<td><input type="text" name="improvement"
-					th:field="*{doneThings.improvement}" /></td>
-			</tr>
-		</table><br>
+<!-- 日報作成時の確認ダイアログ -->
+<script type="text/javascript"> 
+function check(){
+	if(window.confirm('日報を作成しますか？')){
+		return true; //送信実行
+	}
+	else{
+		return false; // 送信中止
+	}
+}
+</script>
 
-		<label>所感(400文字以内)</label><br>
-		<textarea name="impression" cols="50" rows="8"
-			th:field="*{reflection}"></textarea>
-		<p> <input name="submit" type="submit" value="提出"></p>
+<h2>日報</h2>
+
+<form method="post" th:action="@{/doDailyReport}" onSubmit="return check()">
+	<table class="table table-warning table-striped">
+		<tr>
+			<th>やったこと</th>
+			<th>評価</th>
+			<th>改善点など</th>
+		</tr>
+		<tr>
+			<td><input type="text" class="table-warning" name="doneThings.things" /></td>
+			<td>
+				<select class="table-warning" name="doneThings.completeness">
+					<option>○</option>
+					<option>△</option>
+					<option>×</option>
+				</select>
+			</td>
+			<td><input type="text" class="table-warning" name="doneThings.improvement" /></td>
+		</tr>
+		<tr>
+			<td><input type="text" class="table-warning" name="doneThings.things" /></td>
+			<td>
+				<select class="table-warning" name="doneThings.completeness">
+					<option>○</option>
+					<option>△</option>
+					<option>×</option>
+				</select>
+			</td>
+			<td><input type="text" class="table-warning" name="doneThings.improvement" /></td>
+		</tr>
+		<tr>
+			<td><input type="text" class="table-warning" name="doneThings.things" /></td>
+			<td>
+				<select class="table-warning" name="doneThings.completeness">
+					<option>○</option>
+					<option>△</option>
+					<option>×</option>
+				</select>
+			</td>
+			<td><input type="text" class="table-warning" name="doneThings.improvement" /></td>
+		</tr>
+		<tr>
+			<td><input type="text" class="table-warning" name="doneThings.things" /></td>
+			<td>
+				<select class="table-warning" name="doneThings.completeness">
+					<option>○</option>
+					<option>△</option>
+					<option>×</option>
+				</select>
+			</td>
+			<td><input type="text" class="table-warning" name="doneThings.improvement" /></td>
+		</tr>
+		<tr>
+			<td><input type="text" class="table-warning" name="doneThings.things" /></td>
+			<td>
+				<select class="table-warning" name="doneThings.completeness">
+					<option>○</option>
+					<option>△</option>
+					<option>×</option>
+				</select>
+			</td>
+			<td><input type="text" class="table-warning" name="doneThings.improvement" /></td>
+		</tr>
 		
-		
-		<p class="return"><a th:href="@{/select}">戻る</a></p>
-	</form>
+		<tr>
+		<th colspan="3">所感(400字程度)</th>
+		</tr>
+		<tr>
+		<td colspan="3">
+			<textarea name="reflection" cols="80" rows="5"></textarea>
+		</td>
+		</tr>
+	</table>
 	
+	<br/>
+	
+	<input type="submit" class="btn btn-outline-success" value="日報生成" />
+	
+	<div class="select">
+		<a th:href="@{/select}">戻る</a>
+	</div>
+	
+</form>
+
+
 
 </body>
 </html>

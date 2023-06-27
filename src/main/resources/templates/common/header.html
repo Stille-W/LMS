@@ -15,13 +15,28 @@
 </head>
 <body>
 	<header id="header" th:fragment="layout-header">
-		<div>
+		<!-- <div> -->
+		<!--  -
 			<p>
+				&emsp; <a th:href="@{/select}">メニュー</a> &emsp;
 				&emsp; <a th:href="@{/dailyReport}">日報</a> &emsp; <a
 					th:href="@{/attendanceSystem}">勤怠登録</a> &emsp; <a
 					href="/goodsunlms/mail">メールテンプレート</a>
 					
-			</p>
+			</p>->
+		<!-- </div> -->
+		
+		<div>
+		<ul class="nav nav-tabs">
+		
+		<li class="nav nav-item"><a th:href="@{/select}" class="nav-link active" aria-current="page" data-toggle="tab">メニュー</a></li>
+		<li class="nav nav-item"><a th:href="@{/dailyReport}" class="nav-link" data-toggle="tab">日報</a></li>
+		<li class="nav nav-item"><a th:href="@{/attendanceSystem}" class="nav-link" data-toggle="tab">勤怠登録</a></li>
+		<li class="nav nav-item"><a href="/goodsunlms/mail" class="nav-link" data-toggle="tab">メールテンプレート</a></li>
+		
+		
+		
+		</ul>
 		</div>
 		<div>
 			ユーザー名：<span th:text="${session.fullName}"></span>&emsp; <a

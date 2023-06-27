@@ -9,122 +9,123 @@
 </head>
 <body>
 
-<div th:if="${#strings.equals(contents, 'absence')}">
+<div th:if="${#strings.equals(contents, 'absence')}" class="select">
 
-<p>※当日の欠勤連絡は電話でお伝えする方が確実です</p>
-
-<p>
-件名:<br/>
-【勤怠連絡】体調不良による欠勤のご連絡
-</p>
-
-<div id="text_absence">
-<span th:text="${recipient}"></span>さん<br/>
-
-おはようございます。<span th:text="${session.fullName}"></span>です。<br/>
-
-昨晩から体調が優れず、現在も発熱があるため、<br/>
-静養のために欠勤させていただきたくご連絡差し上げました。<br/>
-
-ご迷惑をおかけして大変申し訳ございません。<br/>
-後ほど詳細についてご連絡いたします。<br/>
-よろしくお願いいたします。<br/>
-
-<div th:text="${session.fullName}"></div>
-
-</div>
-
-<p>
-<button type="button" id="copy_absence">本文をコピー</button>
-</p>
-
-<p class="return"><a th:href="@{/mail}">戻る</a></p>
-
-</div>
-
-
-<div th:if="${#strings.equals(contents, 'docSubmit_link')}">
-<p>
-件名:<br/>
-●●ご確認のお願い
-</p>
-
-<div id="text_docSubmit_link">
-<span th:text="${recipient}"></span>さん<br/>
-
-お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
-●●についてご確認をお願いしたくご連絡いたしました。<br/>
-
--------------------------------------<br/>
-　●リンクがある場合は添付●<br/>
--------------------------------------<br/>
-
-お忙しいところ大変恐縮ですが、<br/>
-ご確認のほどよろしくお願いいたします。
-
-<div th:text="${session.fullName}"></div>
-
-</div>
-<p>
-<button type="button" id="copy_docSubmit_link">本文をコピー</button>
-</p>
-
-<p class="return"><a th:href="@{/mail}">戻る</a></p>
+	<p class="attention">※当日の欠勤連絡は電話でお伝えする方が確実です</p>
+	
+	<p class="bg-light rounded p-3 border border-warning border border-2">
+		件名:<br/>
+		【勤怠連絡】体調不良による欠勤のご連絡
+	</p>
+	
+	<div id="text_absence" class="bg-light rounded p-3 border border-warning border border-3">
+		<span th:text="${recipient}"></span>さん<br/>
+		
+			おはようございます。<span th:text="${session.fullName}"></span>です。<br/>
+			
+			昨晩から体調が優れず、現在も発熱があるため、<br/>
+			静養のために欠勤させていただきたくご連絡差し上げました。<br/>
+			
+			ご迷惑をおかけして大変申し訳ございません。<br/>
+			後ほど詳細についてご連絡いたします。<br/>
+			よろしくお願いいたします。<br/>
+	
+		<div th:text="${session.fullName}"></div>
+	
+	</div>
+	
+	<p class="copy_button">
+		<button type="button" id="copy_absence" class="btn btn-outline-success">本文をコピー</button>
+	</p>
+	
+	<p class="return"><a th:href="@{/mail}">戻る</a></p>
 
 </div>
 
-<div th:if="${#strings.equals(contents, 'docSubmit_att')}">
-<p>
-件名:<br/>
-●●ご確認のお願い
-</p>
 
-<div id="text_docSubmit_att">
-<span th:text="${recipient}"></span>さん<br/>
-
-お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
-●●についてご確認をお願いしたくご連絡いたしました。<br/>
-
-本メールに当該のファイルを添付しております。<br/>
-
-お忙しいところ大変恐縮ですが、<br/>
-ご確認のほどよろしくお願いいたします。
-
-<div th:text="${session.fullName}"></div>
+<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="select">
+	<p class="bg-light rounded p-3 border border-warning border border-2">
+		件名:<br/>
+		●●ご確認のお願い
+	</p>
+	
+	<div id="text_docSubmit_link" class="bg-light rounded p-3 border border-warning border border-3">
+		<span th:text="${recipient}"></span>さん<br/>
+		
+		お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
+		●●についてご確認をお願いしたくご連絡いたしました。<br/>
+		
+		-------------------------------------<br/>
+		　●リンクがある場合は添付●<br/>
+		-------------------------------------<br/>
+		
+		お忙しいところ大変恐縮ですが、<br/>
+		ご確認のほどよろしくお願いいたします。
+		
+		<div th:text="${session.fullName}"></div>
+	
+	</div>
+	
+	<p class="copy_button">
+		<button type="button" id="copy_docSubmit_link" class="btn btn-outline-success">本文をコピー</button>
+	</p>
+	
+	<p class="return"><a th:href="@{/mail}">戻る</a></p>
 
 </div>
-<p>
-<button type="button" id="copy_docSubmit_att">本文をコピー</button>
-</p>
 
-<p class="return"><a th:href="@{/mail}">戻る</a></p>
+<div th:if="${#strings.equals(contents, 'docSubmit_att')}" class="select">
+	<p class="bg-light rounded p-3 border border-warning border border-2">
+		件名:<br/>
+		●●ご確認のお願い
+	</p>
+	
+	<div id="text_docSubmit_att" class="bg-light rounded p-3 border border-warning border border-3">
+		<span th:text="${recipient}"></span>さん<br/>
+		
+		お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
+		●●についてご確認をお願いしたくご連絡いたしました。<br/>
+		
+		本メールに当該のファイルを添付しております。<br/>
+		
+		お忙しいところ大変恐縮ですが、<br/>
+		ご確認のほどよろしくお願いいたします。
+		
+		<div th:text="${session.fullName}"></div>
+		
+	</div>
+	
+	<p class="copy_button">
+		<button type="button" id="copy_docSubmit_att" class="btn btn-outline-success">本文をコピー</button>
+	</p>
+	
+	<p class="return"><a th:href="@{/mail}">戻る</a></p>
 
 </div>
 
-<div th:if="${#strings.equals(contents, 'greeting')}">
+<div th:if="${#strings.equals(contents, 'greeting')}" class="select">
 
-<div id="text_greeting">
-<span th:text="${recipient}"></span>さん<br/>
-
-お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
-●●について●●したくご連絡いたしました。<br/>
-
-------<br/>
-&nbsp;本文<br/>
-------<br/>
-
-お手数をお掛けして大変恐縮ですが、<br/>
-よろしくお願いいたします。<br/>
-
-<div th:text="${session.fullName}"></div>
-</div>
-
-<p>
-<button type="button" id="copy_greeting">本文をコピー</button>
-
-</p>
-
-<p class="return"><a th:href="@{/mail}">戻る</a></p>
+	<div id="text_greeting" class="bg-light rounded p-3 border border-warning border border-3">
+		<span th:text="${recipient}"></span>さん<br/>
+		
+		お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
+		●●について●●したくご連絡いたしました。<br/>
+		
+		------<br/>
+		&nbsp;本文<br/>
+		------<br/>
+		
+		お手数をお掛けして大変恐縮ですが、<br/>
+		よろしくお願いいたします。<br/>
+		
+		<div th:text="${session.fullName}"></div>
+	</div>
+	
+	<p class="copy_button">
+		<button type="button" id="copy_greeting" class="btn btn-outline-success">本文をコピー</button>
+	</p>
+	
+	<p class="return"><a th:href="@{/mail}">戻る</a></p>
 
 </div>
 

@@ -69,6 +69,9 @@ public class Form2Excel {
 		// 今やったこと
 		for (int i = 0; i < dailyReportForms.getDoneThingsList().size(); i++) {
 			int col_pos = 1;
+			if (dailyReportForms.getDoneThingsList().get(i).getThings()==null || dailyReportForms.getDoneThingsList().get(i).getThings().isEmpty()) {
+				continue;
+			}
 			// 1行15字
 			this.setValue(row_pos, col_pos++, dailyReportForms.getDoneThingsList().get(i).getThings());
 			this.setValue(row_pos, col_pos++, dailyReportForms.getDoneThingsList().get(i).getCompleteness());
@@ -100,14 +103,6 @@ public class Form2Excel {
 	
 	private void doExcel(DailyReportForm drf) throws IOException {
 		// form情報整え
-		
-		for (int i = 0; i < drf.getDoneThingsList().size(); i++) {
-			// 改行
-			String tStr = drf.getDoneThingsList().get(i).getThings().replaceAll("(.{15})", "$1\n");
-			drf.getDoneThingsList().get(i).setThings(tStr);
-			tStr = drf.getDoneThingsList().get(i).getImprovement().replaceAll("(.{20})", "$1\n");
-			drf.getDoneThingsList().get(i).setImprovement(tStr);
-		}
 		
 		dailyReportForms.setDoneThings(drf.getDoneThings());
 		dailyReportForms.setReflection(drf.getReflection().replaceAll("(.{40})", "$1\n"));

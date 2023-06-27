@@ -39,10 +39,12 @@ public class ManualnputController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date dateTemp = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 			  
-			List<Attendance> attdArr = attendanceRepository.findAll();
+			List<Attendance> attdArr = attendanceRepository.findByUser(user);
+			
 			for (int i = 0; i < attdArr.size(); i++) {
-				if (sdf.format(attdArr.get(i).getDate()).equals(date) && attdArr.get(i).getUser().getId()==user.getId()) {
-					if(removeFirstChar(startTime).equals("9:00") || removeFirstChar(endTime).equals("18:00")) {
+				if (sdf.format(attdArr.get(i).getDate()).equals(date) && attdArr.get(i).getProject().equals("新入社員研修")) {
+//					if(removeFirstChar(startTime).equals("9:00") || removeFirstChar(endTime).equals("18:00")) {
+					if(project.equals(attdArr.get(i).getProject())) {
 						model.addAttribute("stat", "attendanceError");
 						return "error";
 					}	

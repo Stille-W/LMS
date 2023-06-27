@@ -20,7 +20,7 @@ function calcTime(){
 	let hours = Math.floor(diff / 1000 / 60 / 60);
 	diff -= hours * 1000 * 60 * 60;
 	let minutes = Math.floor(diff / 1000 / 60);
-	if($("input[name='project']").val()!= '新人教育（愚痴相談）'){
+	if(!$("input[name='project']").val().includes('愚痴')){
 		hours -= 1;
 	}
 	

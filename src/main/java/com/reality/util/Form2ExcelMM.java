@@ -1,17 +1,14 @@
 package com.reality.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.nio.file.Files;
+import java.io.*;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.filechooser.FileSystemView;
-
+import com.reality.repository.AttendanceRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
@@ -24,19 +21,27 @@ import com.reality.entity.Attendance;
 
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class Form2ExcelMM {
-	
+
+	@Autowired
+	AttendanceRepository attendanceRepository;
+
 	XSSFWorkbook wb;
 	XSSFSheet ws;
-	
-	public void runForm2Excel(List<Attendance> list, String date, HttpSession session) throws Exception {
-//		doExcel(list, session);
-		buildExcel(list, date, session);
-	}
-	
-	
-	private void buildExcel(List<Attendance> list, String date, HttpSession session) throws Exception {
+	boolean isCal = false;
+
+	@GetMapping("/gen")
+	public void buildExcel(Integer month, HttpSession session, HttpServletResponse response) throws Exception {
+
+		List<Attendance> list = attendanceRepository.findByMMAndUserIdOrderByDateAsc(
+				month, Integer.parseInt(session.getAttribute("userId").toString()));
+		String date = Calendar.getInstance().get(Calendar.YEAR)+"/"+month;
+		
 		// excel生成
 		
 		// template利用
@@ -48,10 +53,7 @@ public class Form2ExcelMM {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
 		SimpleDateFormat sdfE = new SimpleDateFormat("E");
-		SimpleDateFormat fileSdf = new SimpleDateFormat("h:mm");
-		XSSFCreationHelper createHelper = wb.getCreationHelper();
-		
-		Row row = ws.getRow(4);
+		XSSFCreationHelper createHelper = wb.getCreationHelper();	
 
 		String yyyy = date.split("/")[0];
 		String mm = Integer.parseInt(date.split("/")[1])<10?"0"+date.split("/")[1]:date.split("/")[1];
@@ -68,6 +70,7 @@ public class Form2ExcelMM {
 		for (int i = 0; i < list.size(); i++) {
 			if (row_pos>34) {
 				insertRow(wb, ws, row_pos-1, 1);
+				isCal = true;
 			}
 			int col_pos = 0;
 			// 日付
@@ -92,18 +95,42 @@ public class Form2ExcelMM {
 
 			row_pos++;
 		}
+		
+		if (isCal) {
+			ws.getRow(row_pos).getCell(5).setCellFormula("SUM(F5:F"+Integer.toString(row_pos)+")");
+		}
+		
 		wb.setForceFormulaRecalculation(true);
 		wb.getCreationHelper().createFormulaEvaluator().evaluateAll();
 		// output
-		
- 		File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
-		String outputFilePath = desktopDir.getAbsolutePath()+"\\";
-		System.out.println(fileSdf.format(new Date()));
+
+		// 生成
 		String outputFileName = yyyy+mm+"_月報_"+ session.getAttribute("fullName").toString() + ".xlsx";
-		Files.createDirectories(new File(outputFilePath).toPath());
-		FileOutputStream stream = new FileOutputStream(outputFilePath + outputFileName);
-		wb.write(stream);
-		stream.close();
+		// local
+// 		File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
+//		String outputFilePath = desktopDir.getAbsolutePath()+"\\";
+//		System.out.println(fileSdf.format(new Date()));		
+//		Files.createDirectories(new File(outputFilePath).toPath());
+//		FileOutputStream stream = new FileOutputStream(outputFilePath + outputFileName);
+
+		// download
+		response.reset();
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(outputFileName, "UTF-8"));
+		String fileNameURL = URLEncoder.encode(outputFileName, "UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-disposition", "attachment;filename=" + fileNameURL + ";" + "filename*=utf-8''" + fileNameURL);
+		response.setContentType("application/octet-stream");
+		response.flushBuffer();
+		OutputStream os = response.getOutputStream();
+
+		wb.write(os);
+		os.flush();
+		os.close();
+
+		// local用
+//		wb.write(stream);
+//		stream.close();
 
 		wb.close();
 

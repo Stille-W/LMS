@@ -16,7 +16,7 @@
 			<input type="submit" value="検索"/>
 	</form>
 	
-		<table border=1>
+		<table border=1 class="table table-bordered">
 			<tr>
 				<th colspan="2">日付</th>
 				<th>開始</th>
@@ -43,8 +43,8 @@
 
 		<div class="form">
 			<input id="genMM" type="month" value="2023-06" name="month" />
-			<button id="genBtn" type="button" th:onclick="gen(this.getAttribute('month'))"
-				th:text="月報生成" th:month="06"></button>
+			<button id="genBtn" type="button" th:onclick="gen()"
+				th:text="月報生成"></button>
 		</div>
 
 

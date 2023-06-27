@@ -4,15 +4,15 @@
  background-color:#ffdead;
  height: 80px;
  display:flex;
- justify-content:flex-end;
+ justify-content: space-between;
  align-items:flex-end;
+ 
  width: 100%;
  position: fixed;
  top: 0px;
  background-image: url();
  background-size: cover;
  background-position: 50% 25%; /* 横 縦 */
- justify-content: space-between;
 }
 
 #container{
@@ -38,8 +38,8 @@ body{
 }
 
 .list{
- margin-left: 10%;
- margin-right:20%;
+ margin-left: 5%;
+ margin-right:10%;
  margin-top: 50px;
 }
 
@@ -58,23 +58,46 @@ h2{
  
 }
 
+[list]::-webkit-calendar-picker-indicator { 
+   display: block; 
+ } 
 
-.attendance{
- margin:0 auto;
-}
 
 form, .form{
- margin:0 auto;
-	
-	/*formを丁度良い場所に置きたい*/
-	padding:50px;
+ padding:50px;
 }
 
-td {
+th, td {
 	text-align: center;
 }
 
 
+.mail{
+	margin-left:20px;
+	padding-top: 50px;
+}
+
+.required:invalid {
+	background: #e6e6fa;
+}
+
+.attention_bold {
+		color:red;
+		font-weight: bold;
+}
+
+.attention {
+	color: red;
+}
+
+#explain{
+	color: #e6e6fa;
+}
+
+
+.copy_button {
+	margin-top: 20px;
+}
 
 .return{
         margin-top: 100px;

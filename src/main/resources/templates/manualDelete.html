@@ -3,14 +3,6 @@
 	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}">
 <head>
 <meta charset="UTF-8">
-<style>
-	table{
-	text-align:center;
-	}
-	.return{
-		margin-top: 100px;
-	}
-</style>
 <title>出勤情報削除</title>
 </head>
 <body>
@@ -25,7 +17,7 @@
 <h2>出勤情報削除</h2>
 <div class="list">
 	<div id="table">
-		<table border=1>
+		<table border=1 class="table table-bordered">
 			<tr>
 				<th colspan="2">日付</th>
 				<th>開始</th>
@@ -45,7 +37,7 @@
 				<td th:text="${attendance.division}"></td>
 				<td th:text="${attendance.workHours}"></td>
 				<td th:text="${attendance.project}"></td>
-					<td th:text="${attendance.place}"></td>
+				<td th:text="${attendance.place}"></td>
 				<td th:text="${attendance.remarks}"></td>
 				<td><button th:onclick="del(this.getAttribute('delId'))" type="button" th:delId="${attendance.id}" th:text="削除"></button></td>
 			</tr>
