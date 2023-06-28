@@ -35,7 +35,7 @@ public class Form2ExcelMM {
 	XSSFSheet ws;
 	boolean isCal = false;
 
-	@GetMapping("/gen")
+	@GetMapping("/genMonth")
 	public void buildExcel(Integer month, HttpSession session, HttpServletResponse response) throws Exception {
 
 		List<Attendance> list = attendanceRepository.findByMMAndUserIdOrderByDateAsc(

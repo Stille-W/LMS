@@ -2,21 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
 	<header id="header" th:fragment="layout-header">
-		<!-- <div> -->
-		<!--  -
+		<!-- <div>
 			<p>
 				&emsp; <a th:href="@{/select}">メニュー</a> &emsp;
 				&emsp; <a th:href="@{/dailyReport}">日報</a> &emsp; <a
@@ -24,25 +15,49 @@
 					href="/goodsunlms/mail">メールテンプレート</a>
 					
 			</p>->
-		<!-- </div> -->
-		
+		 </div> -->
+
+		<!-- 	ナビゲーションバー -->
+		<nav class="navbar navbar-expand-sm navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/select}">メニュー</a>
+				<button type="button" class="navbar-toggler"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<ul class="navbar-nav me-auto mb-2 mb-lg-1">
+					<li><a class="nav-link" aria-current="page"
+						th:href="@{/dailyReport}">日報</a></li>
+					<li><a class="nav-link" href="/goodsunlms/mail">メール</a></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle"
+						href="http://localhost:8080/goodsunlms/attendanceSystem"
+						id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false"> 勤怠</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" th:href="@{/attendanceSystem}">勤怠画面</a></li>
+							<li><a class="dropdown-item" th:href="@{/manualInput}">手動入力</a></li>
+							<li><a class="dropdown-item" th:href="@{/findAllAttendance}">一覧</a></li>
+							<li><a class="dropdown-item" th:href="@{/manualDelete}">削除</a></li>
+						</ul></li>
+				</ul>
+				<div class="header-right">
+					ユーザー名：<span id="userName" th:text="${session.fullName}"></span>&emsp;
+				</div>
+					<a th:href="@{/logout}" class="btn btn-outline-secondary">ログアウト</a>
+			</div>
+		</nav>
+
+
+		<!--  
 		<div>
-		<ul class="nav nav-tabs">
-		
-		<li class="nav nav-item"><a th:href="@{/select}" class="nav-link active" aria-current="page" data-toggle="tab">メニュー</a></li>
-		<li class="nav nav-item"><a th:href="@{/dailyReport}" class="nav-link" data-toggle="tab">日報</a></li>
-		<li class="nav nav-item"><a th:href="@{/attendanceSystem}" class="nav-link" data-toggle="tab">勤怠登録</a></li>
-		<li class="nav nav-item"><a href="/goodsunlms/mail" class="nav-link" data-toggle="tab">メールテンプレート</a></li>
-		
-		
-		
-		</ul>
-		</div>
-		<div>
-			ユーザー名：<span th:text="${session.fullName}"></span>&emsp; <a
+			ユーザー名：<span id="userName" th:text="${session.fullName}"></span>&emsp; <a
 				th:href="@{/logout}">ログアウト</a>
 		</div>
-		
+		-->
 	</header>
 </body>
 </html>

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,11 +19,16 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.reality.form.DailyReportForm;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+@RestController
 public class Form2Excel {
 	
 	/*
@@ -38,15 +45,17 @@ public class Form2Excel {
 	XSSFWorkbook wb;
 	XSSFSheet ws;
 	
-	private DailyReportForm dailyReportForms = new DailyReportForm();
+//	private DailyReportForm dailyReportForms = new DailyReportForm();
 	
-	public void runForm2Excel(DailyReportForm drf) throws Exception {
-		doExcel(drf);
-		buildExcel();
-	}
+//	public void runForm2Excel(DailyReportForm drf) throws Exception {
+//		doExcel(drf);
+//		buildExcel();
+//	}
 	
-	
-	private void buildExcel() throws Exception {
+	@PostMapping("/genDaily")
+	public void buildExcel(DailyReportForm dailyReportForms, HttpServletResponse response) throws Exception {
+		doExcel(dailyReportForms);
+		
 		// excel生成
 		
 		// template利用
@@ -85,27 +94,44 @@ public class Form2Excel {
 		this.setValue(11, 1, dailyReportForms.getReflection());	
 
 		
-		// output
-		
- 		File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
-		String outputFilePath = desktopDir.getAbsolutePath()+"\\";
-		System.out.println(fileSdf.format(new Date()));
 		String outputFileName = "新入社員研修_"+"日報_"+fileSdf.format(new Date()) + ".xlsx";
-		Files.createDirectories(new File(outputFilePath).toPath());
-		FileOutputStream stream = new FileOutputStream(outputFilePath + outputFileName);
-		wb.write(stream);
-		stream.close();
+		
+		// output
+// 		File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
+//		String outputFilePath = desktopDir.getAbsolutePath()+"\\";
+//		System.out.println(fileSdf.format(new Date()));
+//		Files.createDirectories(new File(outputFilePath).toPath());
+//		FileOutputStream stream = new FileOutputStream(outputFilePath + outputFileName);
+		
+		// download
+		response.reset();
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(outputFileName, "UTF-8"));
+		String fileNameURL = URLEncoder.encode(outputFileName, "UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-disposition", "attachment;filename=" + fileNameURL + ";" + "filename*=utf-8''" + fileNameURL);
+		response.setContentType("application/octet-stream");
+		response.flushBuffer();
+		OutputStream os = response.getOutputStream();
+
+		wb.write(os);
+		os.flush();
+		os.close();
+		
+		
+//		wb.write(stream);
+//		stream.close();
 
 		wb.close();
 
 		System.out.println("JOB_DONE");
 	}
 	
-	private void doExcel(DailyReportForm drf) throws IOException {
+	private void doExcel(DailyReportForm dailyReportForms) throws IOException {
 		// form情報整え
 		
-		dailyReportForms.setDoneThings(drf.getDoneThings());
-		dailyReportForms.setReflection(drf.getReflection().replaceAll("(.{40})", "$1\n"));
+		dailyReportForms.setDoneThings(dailyReportForms.getDoneThings());
+		dailyReportForms.setReflection(dailyReportForms.getReflection().replaceAll("(.{40})", "$1\n"));
 		
 //		dailyReportForms.getDoneThingsList().forEach(s->{System.out.println(s.getThings());});
 				

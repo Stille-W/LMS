@@ -40,7 +40,7 @@ public class SessionController {
 			session.setAttribute("userId",user.getId());
 			return "redirect:/select";
 		} else {
-			model.addAttribute("errMessage", "ユーザName、またはパスワードが間違っています。");
+			model.addAttribute("errMessage", "ユーザー名、またはパスワードが間違っています。");
 			return "index";
 		}
 	}
@@ -55,5 +55,10 @@ public class SessionController {
 		session.invalidate();
 		return "index";
 	}
+
+	@GetMapping("/login")
+	public String login() {
+        return "login";
+    }
 	
 }

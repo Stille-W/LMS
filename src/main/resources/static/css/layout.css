@@ -1,28 +1,23 @@
 @charset "UTF-8";
 
+.bg-light {
+    background-color: #C0DBEA!important;
+}
+
 #header {
- background-color:#ffdead;
- height: 80px;
- display:flex;
- justify-content: space-between;
- align-items:flex-end;
- 
  width: 100%;
  position: fixed;
  top: 0px;
- background-image: url();
- background-size: cover;
- background-position: 50% 25%; /* 横 縦 */
 }
 
-#container{
-	background-image: url();
-	background-size: cover;
+.header-right{
+display:flex;
+white-space: nowrap;
 }
 
 article{
  display:flex;
- margin-top: 80px;
+ margin-top: 60px;
  width: 100%;
  min-height: 100vh;
 }
@@ -63,14 +58,13 @@ h2{
  } 
 
 
-form, .form{
+form .form{
  padding:50px;
 }
 
 th, td {
 	text-align: center;
 }
-
 
 .mail{
 	margin-left:20px;
@@ -99,6 +93,56 @@ th, td {
 	margin-top: 20px;
 }
 
+.attCard {
+	height: 300px;
+	margin: 10% 10px;
+	padding: 50px 20px 20px;
+	border: 2px solid #666666;
+	border-radius: 20px;
+	border-color: #bee5eb;
+	border-width: 5px;
+	border-image: linear-gradient(to bottom, #bee5eb 10%, pink 100%);
+	border-image-slice: 1;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.attBtn {
+	margin-bottom: 70px;
+}
+
+.att_title{
+	height: 110px;
+	text-align: center;
+	padding-top: 0;
+}
+
+#comp_title{
+	height: 30px;
+	margin-bottom:10%
+}
+
+#comp_btn {
+	margin-bottom: 30px;
+}
+
 .return{
         margin-top: 100px;
+    }
+
+.loading {
+    position: fixed;
+    width: 100%;
+    height: -webkit-fill-available;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading img {
+    height: 200px;
     }
