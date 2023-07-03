@@ -12,26 +12,51 @@
 	
 	<form method="post" th:action="@{/attendanceRegister}" class="attCard">
 		<h4 class="text-secondary att_title">【出勤登録】</h4>
-		<input type="submit" class="btn btn-outline-info attBtn" value=">出勤登録" onClick="Check();" />
+		<input type="submit" class="btn btn-outline-pink attBtn" value=">出勤登録" onClick="Check();" />
 	</form>
 
 	<form method="post" th:action="@{/complaints}" class="attCard">
 		<h4 class="text-secondary att_title" id="comp_title">【愚痴相談登録】</h4>
-		<div class="text-secondary" id="comp_btn">
-			開始時間◆<input type="time" class="table-info" value="18:30" name="startTime" step="1800" />
+		<div class="text-secondary comp_btn">
+			<label>
+				開始時間◆<input type="time" class="table-lb" value="18:30" name="startTime" step="1800" />
+			</label>
 			<br />
-			終了時間◆<input type="time" class="table-info" value="19:00" name="endTime" step="1800"/>
+			<label>
+				終了時間◆<input type="time" class="table-purple" value="19:00" name="endTime" step="1800"/>
+			</label>
 			<br />
-			開催場所◆<input type="text" class="table-info" name="place" required/>
+			<label>
+				備考　　◆
+					<select class="table-purple text-secondary" name="remarks"required>
+						<option value="">メンターを選択</option>
+						<option>加藤さん</option>
+						<option>小林さん</option>
+						<option>平野さん</option>
+						<option>重地さん</option>
+						<option>白髭さん</option>
+					</select>
+				</label>
+			<br />
+			<label>
+				開催場所◆<input type="text" class="table-pink" name="place"
+							list="place-list" placeholder="選択または入力" autocomplete="off" required/>
+								<datalist id="place-list">
+									<option value="高田馬場事務所"></option>
+									<option value="高田馬場"></option>
+									<option value="中野"></option>
+									<option value="在宅"></option>
+								</datalist>
+			</label>
 		</div>
-		<input type="submit" class="btn btn-outline-info" id="comp_btn" value=">登録" />
+		<input type="submit" class="btn btn-outline-pink comp_btn" value=">登録" />
 	</form>
 	
 	<div class="attCard">
 		<h4 class="text-secondary att_title">【手動入力】</h4><br/>
-		<a th:href="@{/manualInput}" class="link-info">&#62;勤怠情報入力</a><br/>
-		<a th:href="@{/manualDelete}" class="link-info">&#62;勤怠情報削除</a><br/>
-		<a th:href="@{/findAllAttendance}" class="link-info attBtn">&#62;勤怠情報一覧</a>
+		<a th:href="@{/manualInput}" class="link-purple">&#62;勤怠情報入力</a><br/>
+		<a th:href="@{/manualDelete}" class="link-purple">&#62;勤怠情報削除</a><br/>
+		<a th:href="@{/findAllAttendance}" class="link-purple attBtn">&#62;勤怠情報一覧</a>
 	</div>
 
 

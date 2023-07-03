@@ -115,12 +115,10 @@ public class Form2ExcelMM {
 
 		// download
 		response.reset();
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(outputFileName, "UTF-8"));
 		String fileNameURL = URLEncoder.encode(outputFileName, "UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setHeader("Content-disposition", "attachment;filename=" + fileNameURL + ";" + "filename*=utf-8''" + fileNameURL);
-		response.setContentType("application/octet-stream");
 		response.flushBuffer();
 		OutputStream os = response.getOutputStream();
 

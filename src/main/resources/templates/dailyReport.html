@@ -24,59 +24,59 @@
 			<th class="text-secondary">改善点など</th>
 		</tr>
 		<tr>
-			<td><input type="text" class="table-info" name="doneThings.things" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.things" autocomplete="off" /></td>
 			<td>
-				<select class="table-info" name="doneThings.completeness">
+				<select class="table-lb" name="doneThings.completeness">
 					<option>○</option>
 					<option>△</option>
 					<option>×</option>
 				</select>
 			</td>
-			<td><input type="text" class="table-info" name="doneThings.improvement" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.improvement" autocomplete="off" /></td>
 		</tr>
 		<tr>
-			<td><input type="text" class="table-info" name="doneThings.things" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.things" autocomplete="off" /></td>
 			<td>
-				<select class="table-info" name="doneThings.completeness">
+				<select class="table-lb" name="doneThings.completeness">
 					<option>○</option>
 					<option>△</option>
 					<option>×</option>
 				</select>
 			</td>
-			<td><input type="text" class="table-info" name="doneThings.improvement" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.improvement" autocomplete="off" /></td>
 		</tr>
 		<tr>
-			<td><input type="text" class="table-info" name="doneThings.things" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.things" autocomplete="off" /></td>
 			<td>
-				<select class="table-info" name="doneThings.completeness">
+				<select class="table-lb" name="doneThings.completeness">
 					<option>○</option>
 					<option>△</option>
 					<option>×</option>
 				</select>
 			</td>
-			<td><input type="text" class="table-info" name="doneThings.improvement" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.improvement" autocomplete="off" /></td>
 		</tr>
 		<tr>
-			<td><input type="text" class="table-info" name="doneThings.things" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.things" autocomplete="off" /></td>
 			<td>
-				<select class="table-info" name="doneThings.completeness">
+				<select class="table-lb" name="doneThings.completeness">
 					<option>○</option>
 					<option>△</option>
 					<option>×</option>
 				</select>
 			</td>
-			<td><input type="text" class="table-info" name="doneThings.improvement" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.improvement" autocomplete="off" /></td>
 		</tr>
 		<tr>
-			<td><input type="text" class="table-info" name="doneThings.things" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.things" autocomplete="off" /></td>
 			<td>
-				<select class="table-info" name="doneThings.completeness">
+				<select class="table-lb" name="doneThings.completeness">
 					<option>○</option>
 					<option>△</option>
 					<option>×</option>
 				</select>
 			</td>
-			<td><input type="text" class="table-info" name="doneThings.improvement" /></td>
+			<td><input type="text" class="table-lb" name="doneThings.improvement" autocomplete="off" /></td>
 		</tr>
 		
 		<tr>
@@ -84,23 +84,18 @@
 		</tr>
 		<tr>
 		<td colspan="3">
-			<textarea name="reflection" class="table-info" cols="80" rows="5"></textarea>
+			<textarea name="reflection" class="table-lb" cols="80" rows="5"></textarea>
 		</td>
 		</tr>
 	</table>
 	
 	<br/>
 
-	<button type="button" class="btn btn-outline-info" th:onclick="submitAndRedirect()">日報生成</button>
-	
-	<div class="select">
-		<a th:href="@{/select}" class="link-info">戻る</a>
-	</div>
+	<button type="button" class="btn btn-outline-lb" th:onclick="submitAndRedirect()">日報生成</button>
 	
 </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script th:src="@{/js/dailyReport.js}" type="text/javascript"></script>
 </body>
 </html>

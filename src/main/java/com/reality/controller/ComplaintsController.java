@@ -24,7 +24,7 @@ public class ComplaintsController {
 	UserRepository userRepository;
 	
 	@PostMapping("/complaints")
-	public String complaints(Model model, HttpSession session, String startTime, String endTime, String place) {
+	public String complaints(Model model, HttpSession session, String startTime, String endTime, String place, String remarks) {
 		Attendance attendance = new Attendance();
 		User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
 		Date date = new Date();
@@ -46,10 +46,11 @@ public class ComplaintsController {
 		attendance.setWorkHours("0:30");
 		attendance.setPlace(place);
 		attendance.setProject("新人教育（愚痴相談）");
+		attendance.setRemarks(remarks);
 		attendance.setUser(user);
 		attendanceRepository.save(attendance);
-		model.addAttribute("attendance");
-		return "complaintsMessage";
+		model.addAttribute("stat", "complaints");
+		return "loading";
 	}
 	
 	//　時刻の入力形式変更 ex) 09:00 >> 9:00

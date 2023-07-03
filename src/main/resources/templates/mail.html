@@ -8,9 +8,9 @@
 <title>メールテンプレート</title>
 </head>
 <body>
-	<h2>メールテンプレート</h2>
+	<h2 class="text-secondary">メールテンプレート</h2>
 
-	<div class="mail">
+	<div class="mail text-secondary">
 		<span class="attention_bold">
 			※このテンプレートはあくまで一例です。<br />
 			必ずしも正解のテンプレートとは限りません。<br />
@@ -29,9 +29,9 @@
 					</datalist>
 				-->
 				
-				<p>送信相手の名前を入力◆ <input type="text" class="table-success" name="recipient" /></p>
+				<p>送信相手の名前を入力◆ <input type="text" class="table-lb" name="recipient" /></p>
 				<p>テンプレート内容を選択◆
-					<select name="contents" class="table-success">
+					<select name="contents" class="table-lb text-secondary">
 						<option value="docSubmit_link">書類提出（リンク添付）</option>
 						<option value="docSubmit_att">書類提出（ファイル添付）</option>
 						<option value="absence">欠勤連絡</option>
@@ -40,12 +40,9 @@
 				</p>
 					
 				<p>
-					<input type="submit" class="btn btn-outline-success" value="テンプレート出力" />
+					<input type="submit" class="btn btn-outline-lb" value="テンプレート出力" />
 				</p>
 				
-				<p class="return">
-					<a th:href="@{/select}">戻る</a>
-				</p>
 			</form>
 		</p>
 

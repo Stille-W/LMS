@@ -13,7 +13,10 @@
 		} else if($("input").val()== "attendanceError") {
 			alert("登録済みです");
 			window.location.href = "./findAllAttendance";
-		}		
+		} else if($("input").val()== "sendFail") {
+			alert("送信失敗です");
+			window.location.replace("./mail");
+		}
 		else{
 			alert("エラーが出ます。\n"+$("input").val());
 			window.location.href = "./index";

@@ -1,6 +1,10 @@
 function del(index){
-	$.post('./doManualDelete1',{aId:index},function(){
-		console.log(index);
-		$("#table").load('./manualDelete table');
-	});
+	let result = confirm('削除しますか？');
+	
+	if(result) {
+		$.post('./doManualDeleteAjax',{aId:index},function(){
+			console.log(index);
+			$("#table").load('./manualDelete table');
+		});
+	}	
 }

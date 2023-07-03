@@ -6,23 +6,23 @@
 <title>メニュー</title>
 </head>
 <body>
-	<h2>メニュー</h2>
-	<div class="select">
+	<h2 class="text-secondary">メニュー</h2>
+	<div class="select attCard" style="width:30%; text-align: center;">
 
 		<p>
-			<a th:href="@{/dailyReport}">日報</a>
+			<a th:href="@{/dailyReport}" class="link-info">日報</a>
 		</p>
 
 		<p>
-			<a th:href="@{/attendanceSystem}">勤怠登録</a>
+			<a th:href="@{/attendanceSystem}"class="link-info">勤怠登録</a>
 		</p>
 		
 		<p>
-			<a th:href="@{/mail}">メールテンプレート</a>
+			<a th:href="@{/mail}" class="link-info">メールテンプレート</a>
 		</p>
 
 		<p>
-			<a th:href="@{/logout}">ログアウト</a>
+			<a th:href="@{/logout}" class="link-info">ログアウト</a>
 		</p>
 	</div>
 </body>

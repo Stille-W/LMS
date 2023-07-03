@@ -7,16 +7,6 @@
 </head>
 <body>
 	<header id="header" th:fragment="layout-header">
-		<!-- <div>
-			<p>
-				&emsp; <a th:href="@{/select}">メニュー</a> &emsp;
-				&emsp; <a th:href="@{/dailyReport}">日報</a> &emsp; <a
-					th:href="@{/attendanceSystem}">勤怠登録</a> &emsp; <a
-					href="/goodsunlms/mail">メールテンプレート</a>
-					
-			</p>->
-		 </div> -->
-
 		<!-- 	ナビゲーションバー -->
 		<nav class="navbar navbar-expand-sm navbar-light bg-light">
 			<div class="container-fluid">
@@ -38,26 +28,18 @@
 						id="navbarDropdown" role="button" data-bs-toggle="dropdown"
 						aria-expanded="false"> 勤怠</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" th:href="@{/attendanceSystem}">勤怠画面</a></li>
+							<li><a class="dropdown-item" th:href="@{/attendanceSystem}">勤怠メニュー</a></li>
 							<li><a class="dropdown-item" th:href="@{/manualInput}">手動入力</a></li>
 							<li><a class="dropdown-item" th:href="@{/findAllAttendance}">一覧</a></li>
 							<li><a class="dropdown-item" th:href="@{/manualDelete}">削除</a></li>
 						</ul></li>
 				</ul>
-				<div class="header-right">
+				<div class="header-right text-secondary">
 					ユーザー名：<span id="userName" th:text="${session.fullName}"></span>&emsp;
 				</div>
-					<a th:href="@{/logout}" class="btn btn-outline-secondary">ログアウト</a>
+				<a th:href="@{/logout}" class="btn btn-outline-lb">ログアウト</a>
 			</div>
 		</nav>
-
-
-		<!--  
-		<div>
-			ユーザー名：<span id="userName" th:text="${session.fullName}"></span>&emsp; <a
-				th:href="@{/logout}">ログアウト</a>
-		</div>
-		-->
 	</header>
 </body>
 </html>

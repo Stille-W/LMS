@@ -7,16 +7,21 @@
 <title>勤怠情報一覧</title>
 </head>
 <body>
- 	<h2>勤怠情報一覧</h2>
+<div class="loading">
+	<img src="img/loading.gif">
+</div>
+ 	<h2 class="text-secondary">勤怠情報一覧</h2>
 
-	<div class="list">
+	<div class="list text-secondary">
 	
+	<div class="form">
 	<form th:action="@{/findByMonth}" method="get">
-			月別検索◆<input type="month" value="2023-06" name="month" />
-			<input type="submit" value="検索"/>
+			月別検索◆<input type="month" class="text-secondary table-lb" th:value="${session.date}" name="month" />
+			<input type="submit" class="btn btn-outline-lb" value="検索"/>
 	</form>
+	</div>
 	
-		<table border=1 class="table table-light  table-hover border border-primary">
+		<table border=1 class="select table table-lb text-secondary table-hover border border-pink table-bordered">
 			<tr>
 				<th colspan="2">日付</th>
 				<th>開始</th>
@@ -41,21 +46,20 @@
 		</table>
 
 
-		<div class="form">
-			<input id="genMM" type="month" value="2023-06" name="month" />
-			<button id="genBtn" type="button" th:onclick="gen()"
-				th:text="月報生成"></button>
+		<div class="select">
+			<input id="genMM" type="month" class="text-secondary table-pink" th:value="${session.date}" name="month" />
+			<button type="button" class="btn btn-outline-pink" th:onclick="submitAndRedirect()" th:text="月報生成"></button>
 		</div>
 
 
 		<p class="return">
-			<a th:href="@{/attendanceSystem}">戻る</a>
-
+			<a th:href="@{/attendanceSystem}" class="icon-link link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+</svg></a>
 		</p>
 
 	</div>
 
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script th:src="@{/js/findAllAttendance.js}" type="text/javascript"></script>
 </body>
 </html>

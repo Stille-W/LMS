@@ -8,17 +8,18 @@
 
 </head>
 <body>
+<div class="content">
+	<!-- 欠勤連絡 -->
+	<div th:if="${#strings.equals(contents, 'absence')}" class="select">
 
-<div th:if="${#strings.equals(contents, 'absence')}" class="select">
+		<p class="attention">※当日の欠勤連絡は電話でお伝えする方が確実です</p>
 
-	<p class="attention">※当日の欠勤連絡は電話でお伝えする方が確実です</p>
-	
-	<p class="bg-light rounded p-3 border border-warning border border-2">
-		件名:<br/>
-		【勤怠連絡】体調不良による欠勤のご連絡
-	</p>
-	
-<div id="text_absence" class="bg-light rounded p-3 border border-warning border border-3">
+		<p id="title_absence" class="bg-lb rounded p-3 border border-lb border border-2">
+			件名:<br/>
+			【勤怠連絡】体調不良による欠勤のご連絡
+		</p>
+
+<div id="text_absence" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
 
 おはようございます。<span th:text="${session.fullName}"></span>です。<br/>
@@ -32,23 +33,16 @@
 
 <div th:text="${session.fullName}"></div>
 </div>
-	
-	<p class="copy_button">
-		<button type="button" id="copy_absence" class="btn btn-outline-success">本文をコピー</button>
-	</p>
-	
-	<p class="return"><a th:href="@{/mail}">戻る</a></p>
+	</div>
 
-</div>
+	<!-- リンク添付 -->
+	<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="mail">
+		<p id="title_docSubmit_link" class="bg-lb rounded p-3 border border-lb border border-2">
+			件名:<br/>
+			●●ご確認のお願い
+		</p>
 
-
-<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="mail">
-	<p class="bg-light rounded p-3 border border-warning border border-2">
-		件名:<br/>
-		●●ご確認のお願い
-	</p>
-	
-<div id="text_docSubmit_link" class="bg-light rounded p-3 border border-warning border border-3">
+<div id="text_docSubmit_link" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
 
 お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
@@ -63,22 +57,16 @@
 
 <div th:text="${session.fullName}"></div>
 </div>
-	
-	<p class="copy_button">
-		<button type="button" id="copy_docSubmit_link" class="btn btn-outline-success">本文をコピー</button>
-	</p>
-	
-	<p class="return"><a th:href="@{/mail}">戻る</a></p>
-
 </div>
 
-<div th:if="${#strings.equals(contents, 'docSubmit_att')}" class="select">
-	<p class="bg-light rounded p-3 border border-warning border border-2">
-		件名:<br/>
-		●●ご確認のお願い
-	</p>
-	
-<div id="text_docSubmit_att" class="bg-light rounded p-3 border border-warning border border-3">
+	<!-- ファイル添付 -->
+	<div th:if="${#strings.equals(contents, 'docSubmit_att')}" class="select">
+		<p id="title_docSubmit_att" class="bg-lb rounded p-3 border border-lb border border-2">
+			件名:<br/>
+			●●ご確認のお願い
+		</p>
+
+<div id="text_docSubmit_att" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
 
 お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
@@ -91,18 +79,12 @@
 
 <div th:text="${session.fullName}"></div>
 </div>
-	
-	<p class="copy_button">
-		<button type="button" id="copy_docSubmit_att" class="btn btn-outline-success">本文をコピー</button>
-	</p>
-	
-	<p class="return"><a th:href="@{/mail}">戻る</a></p>
-
 </div>
 
-<div th:if="${#strings.equals(contents, 'greeting')}" class="select">
+	<!-- 挨拶と結びのみ -->
+	<div th:if="${#strings.equals(contents, 'greeting')}" class="select">
 
-<div id="text_greeting" class="bg-light rounded p-3 border border-warning border border-3">
+<div id="text_greeting" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
 
 お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
@@ -117,17 +99,15 @@
 
 <div th:text="${session.fullName}"></div>
 </div>
-	
-	<p class="copy_button">
-		<button type="button" id="copy_greeting" class="btn btn-outline-success">本文をコピー</button>
-	</p>
-	
-	<p class="return"><a th:href="@{/mail}">戻る</a></p>
+</div>
+
+	<div class="copy_button">
+		<button type="button" id="copy_absence" class="copy btn btn-outline-pink">本文をコピー</button>
+		<button type="button" id="to_sendMail" class="btn btn-outline-pink" th:onclick="toSendMail()">送信へ</button>
+	</div>
 
 </div>
 
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script th:src="@{/js/mailTemplate.js}" type="text/javascript"></script>
 
 </body>

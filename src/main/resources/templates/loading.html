@@ -13,6 +13,12 @@
 		} else if ($("input").val()=="attendance"){
 			alert("本日も出勤お疲れ様です");
 			window.location.href = "./findAllAttendance";
+		} else if ($("input").val()=="complaints") {
+			alert("愚痴相談会の記録をしました");
+			window.location.href = "./findAllAttendance";
+		} else if ($("input").val()=="sendSuccess") {
+		    alert("送信成功です!");
+		    window.location.replace("./mail");
 		}
 		
 		

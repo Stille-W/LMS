@@ -1,9 +1,9 @@
 let btnId;
 let textId;
 
-$('button').click(function(){
+$('.copy').click(function(){
 	btnId = this.getAttribute("id");
-	textId = $('#'+ btnId).parent().parent().children("div").attr("id");
+	textId = $('#'+ btnId).parent().parent().children().children("div").attr("id");
 	console.log($('#' + textId).text());
 	// let btn = getElementById("btnId");
 	
@@ -22,6 +22,19 @@ $('button').click(function(){
 	   alert('コピーに失敗しました。');
 	 });
 });
+
+function toSendMail() {
+    let tid = $(".mail").children("p.bg-lb").attr("id");
+    let teid = $(".mail").children("div").attr("id");
+
+    let tcont = $('#' + tid).text().split(":")[1].trim();
+    let tecont = $('#' + teid).html();
+    tecont = tecont.replace(/<span>|<\/span>|<\/div>/ig, "").replace(/<br>|<div>/ig, "%0A");
+//    console.log(tecont);
+
+    window.location.href = "./sendMail?title="+tcont+"&text="+tecont;
+
+}
 
 /*
 $(document).ready(function(){
