@@ -35,8 +35,10 @@
 						</ul></li>
 				</ul>
 				<div class="header-right text-secondary">
-					ユーザー名：<span id="userName" th:text="${session.fullName}"></span>&emsp;
+					ユーザー名：<a class="link-user" th:href="@{/editUser}"><span id="userName" th:text="${session.fullName}">
+								</span></a>&emsp;
 				</div>
+<!--				<a th:href="@{/editUser}" class="btn btn-outline-lb">設定</a>&emsp;-->
 				<a th:href="@{/logout}" class="btn btn-outline-lb">ログアウト</a>
 			</div>
 		</nav>

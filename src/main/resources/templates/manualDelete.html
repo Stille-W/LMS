@@ -3,7 +3,7 @@
 	th:replace="~{common/layout :: layout(~{::title},~{::body/content()})}">
 <head>
 <meta charset="UTF-8">
-<title>出勤情報削除</title>
+<title>勤怠情報削除</title>
 </head>
 <body>
 <!-- 	<form method="post" th:action="@{/doManualDelete}"> -->
@@ -14,7 +14,7 @@
 <!-- 	</form> -->
 	
 <!-- 	<p> -->
-<h2 class="text-secondary">出勤情報削除</h2>
+<h2 class="text-secondary">勤怠情報削除</h2>
 <div class="list text-secondary">
 	
 	<div class="searchBtn_a">
@@ -24,13 +24,15 @@
 	</form>
 	
 	<div class="searchBtn_b" style="display: inline">
-	<form th:action="@{/findByDateDescManualDelete}" method="get" style="display: inline">
-			<input type="submit" class="btn btn-outline-lb" value="降順"/>
-	</form>
 	
 	<form th:action="@{/findByDateAscManualDelete}" method="get" style="display: inline">
 			<input type="submit" class="btn btn-outline-lb" value="昇順"/>
 	</form>
+	
+	<form th:action="@{/findByDateDescManualDelete}" method="get" style="display: inline">
+			<input type="submit" class="btn btn-outline-lb" value="降順"/>
+	</form>
+
 	</div>
 	</div>
 	

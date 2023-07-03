@@ -34,6 +34,8 @@ function toSendMail() {
 
     window.location.href = "./sendMail?title="+tcont+"&text="+tecont;
 
+//    window.location.href = "mailto:?"+sendTo+"subject="+tcont+"&body="+tecont;
+
 }
 
 /*

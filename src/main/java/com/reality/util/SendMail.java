@@ -24,33 +24,40 @@ import java.util.Properties;
 @Controller
 public class SendMail {
 
-    private static final KeyPair keyPair = initKey();
-
+//    protect static final KeyPair keyPair = initKey();
 
     @GetMapping("/sendMail")
     public String sendMail(String title, String text, Model model) throws NoSuchAlgorithmException {
-        String publicKey = transPublicKey();
-        model.addAttribute("publicKey", publicKey);
         model.addAttribute("title", title);
         model.addAttribute("text", text);
         return "sendmail";
     }
 
-    @PostMapping("/sendMail")
-    public String send(String sendTo, String mailAddress, String password, String title, String text, Model model) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
-        String decryptedPassword = new String(splitDecrypt(password, cipher)).replaceAll("[^a-zA-Z0-9`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？\\\\]", "");
+//    @GetMapping("/sendMail")
+//    public String sendMail(String title, String text, Model model) throws NoSuchAlgorithmException {
+//        String publicKey = transPublicKey();
+//        model.addAttribute("publicKey", publicKey);
+//        model.addAttribute("title", title);
+//        model.addAttribute("text", text);
+//        return "sendmail";
+//    }
 
-        try {
-            submit(mailAddress, decryptedPassword, sendTo, title, text);
-        } catch (Exception e) {
-            model.addAttribute("stat", "sendFail");
-            return "error";
-        }
-        model.addAttribute("stat", "sendSuccess");
-        return "loading";
-    }
+//    @PostMapping("/sendMail")
+//    public String send(String sendTo, String mailAddress, String password, String title, String text, Model model) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+//        Cipher cipher = Cipher.getInstance("RSA");
+//        cipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
+//        String decryptedPassword = new String(splitDecrypt(password, cipher)).replaceAll("[^a-zA-Z0-9`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？\\\\\\-]", "");
+//
+//        try {
+//            submit(mailAddress, decryptedPassword, sendTo, title, text);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            model.addAttribute("stat", "sendFail");
+//            return "error";
+//        }
+//        model.addAttribute("stat", "sendSuccess");
+//        return "loading";
+//    }
 
     private void submit(String mailAddress, String password, String to, String title, String text) throws Exception {
         // smpt 設定
@@ -112,11 +119,11 @@ public class SendMail {
         return generator.generateKeyPair();
     }
 
-    private static String transPublicKey() {
-        PublicKey publicKey = keyPair.getPublic();
-
-        return Base64.encodeBase64String(publicKey.getEncoded());
-    }
+//    private static String transPublicKey() {
+//        PublicKey publicKey = keyPair.getPublic();
+//
+//        return Base64.encodeBase64String(publicKey.getEncoded());
+//    }
 
     private static byte[] splitDecrypt(String password, Cipher cipher) throws IllegalBlockSizeException, BadPaddingException {
         byte[] decyrptedPwByte = Base64.decodeBase64(password.getBytes(StandardCharsets.UTF_8));

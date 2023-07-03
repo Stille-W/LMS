@@ -1,0 +1,22 @@
+.error {
+    font-size: 14px;
+	color: red;
+	margin: 0;
+}
+
+input {
+    width: 100%;
+}
+
+.btn-outline-lb {
+    padding: 2px 24px;
+    font-size: 16px;
+}
+
+.btnCol {
+    margin-top: 24px;
+}
+
+.info {
+    font-size: 12px;
+}

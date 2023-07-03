@@ -1,5 +1,6 @@
 package com.reality.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,5 +42,35 @@ public class UserController {
 		user.setPassword(form.getPassword());
 		userRepository.save(user);
 		return "user";
+	}
+
+	@GetMapping("/editUser")
+	public String editUser(@ModelAttribute UserSigninForm form, Model model, HttpSession session) {
+		User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
+
+		form.setUserName(user.getUserName());
+		form.setFullName(user.getFullName());
+		form.setPassword(user.getPassword());
+		return "editUser";
+	}
+
+	@PostMapping("/editUser")
+	public String doEditUser(@Valid @ModelAttribute UserSigninForm form, BindingResult result, Model model, HttpSession session) {
+		User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
+
+		if (result.hasErrors()) {
+			form.setUserName(user.getUserName());
+			form.setFullName(user.getFullName());
+			form.setPassword(user.getPassword());
+			System.out.println(result.toString());
+			return "editUser";
+		}
+
+		user.setFullName(form.getFullName());
+		user.setPassword(form.getPassword());
+		userRepository.save(user);
+		session.setAttribute("fullName",user.getFullName());
+		model.addAttribute("stat", "editUserSuccess");
+		return "loading";
 	}
 }
