@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import com.reality.repository.AttendanceRepository;
 import jakarta.servlet.http.HttpServletResponse;
@@ -52,7 +53,7 @@ public class Form2ExcelMM {
 		ws = wb.getSheetAt(0);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
-		SimpleDateFormat sdfE = new SimpleDateFormat("E");
+		SimpleDateFormat sdfE = new SimpleDateFormat("E", Locale.JAPANESE);
 		XSSFCreationHelper createHelper = wb.getCreationHelper();	
 
 		String yyyy = date.split("/")[0];

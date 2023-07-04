@@ -4,7 +4,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -16,6 +15,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.Authenticator;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class SendMail {
     public String sendMail(String title, String text, Model model) throws NoSuchAlgorithmException {
         model.addAttribute("title", title);
         model.addAttribute("text", text);
-        return "sendmail";
+        return "sendMail";
     }
 
 //    @GetMapping("/sendMail")

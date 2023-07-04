@@ -24,8 +24,8 @@ $('.copy').click(function(){
 });
 
 function toSendMail() {
-    let tid = $(".mail").children("p.bg-lb").attr("id");
-    let teid = $(".mail").children("div").attr("id");
+    let tid = $(".select").children("p.bg-lb").attr("id");
+    let teid = $(".select").children("div").attr("id");
 
     let tcont = $('#' + tid).text().split(":")[1].trim();
     let tecont = $('#' + teid).html();

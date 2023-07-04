@@ -22,22 +22,22 @@
 
 <div id="text_absence" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
-
+<br/>
 おはようございます。<span th:text="${session.fullName}"></span>です。<br/>
-
+<br/>
 昨晩から体調が優れず、現在も発熱があるため、<br/>
 静養のために欠勤させていただきたくご連絡差し上げました。<br/>
-
+<br/>
 ご迷惑をおかけして大変申し訳ございません。<br/>
 後ほど詳細についてご連絡いたします。<br/>
 よろしくお願いいたします。<br/>
-
+<br/>
 <div th:text="${session.fullName}"></div>
 </div>
 	</div>
 
 	<!-- リンク添付 -->
-	<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="mail">
+	<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="mail select">
 		<p id="title_docSubmit_link" class="bg-lb rounded p-3 border border-lb border border-2">
 			件名:<br/>
 			●●ご確認のお願い
@@ -45,17 +45,17 @@
 
 <div id="text_docSubmit_link" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
-
+<br/>
 お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
 ●●についてご確認をお願いしたくご連絡いたしました。<br/>
-
+<br/>
 -------------------------------------<br/>
 　●リンクがある場合は添付●<br/>
 -------------------------------------<br/>
-
+<br/>
 お忙しいところ大変恐縮ですが、<br/>
-ご確認のほどよろしくお願いいたします。
-
+ご確認のほどよろしくお願いいたします。<br/>
+<br/>
 <div th:text="${session.fullName}"></div>
 </div>
 </div>
@@ -69,15 +69,15 @@
 
 <div id="text_docSubmit_att" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
-
+<br/>
 お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
 ●●についてご確認をお願いしたくご連絡いたしました。<br/>
-
+<br/>
 本メールに当該のファイルを添付しております。<br/>
-
+<br/>
 お忙しいところ大変恐縮ですが、<br/>
-ご確認のほどよろしくお願いいたします。
-
+ご確認のほどよろしくお願いいたします。<br/>
+<br/>
 <div th:text="${session.fullName}"></div>
 </div>
 </div>
@@ -87,17 +87,17 @@
 
 <div id="text_greeting" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
-
+<br/>
 お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
 ●●について●●したくご連絡いたしました。<br/>
-
+<br/>
 ------<br/>
 &nbsp;本文<br/>
 ------<br/>
-
+<br/>
 お手数をお掛けして大変恐縮ですが、<br/>
 よろしくお願いいたします。<br/>
-
+<br/>
 <div th:text="${session.fullName}"></div>
 </div>
 </div>
