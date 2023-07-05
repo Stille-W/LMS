@@ -1,8 +1,11 @@
 package com.reality.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,39 +20,74 @@ import com.reality.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * @author yagami.wakana
+ *
+ */
+
+
 @Controller
 public class AttendanceController {
-	// にゃー
-
     @Autowired
     AttendanceRepository attendanceRepository;
 
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * 勤怠関連のメニュー画面を表示
+     */
     @GetMapping("/attendanceSystem")
-    public String attendanceSystem() {
+    public String attendanceSystem(HttpSession session) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        int month = Integer.parseInt(sdf.format(date));
+        int uid = Integer.parseInt(session.getAttribute("userId").toString());
+
+        LocalDate now = LocalDate.now();
+        LocalDate first = now.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate last = now.with(TemporalAdjusters.lastDayOfMonth());
+
+        Date startDate = Date.from(first.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(last.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+
+        if (attendanceRepository.findByMMAndUserIdOrderByDateAsc(month, uid).size() == 0) {
+            Calendar startCal = Calendar.getInstance();
+            startCal.setTime(startDate);
+            Calendar endCal = Calendar.getInstance();
+            endCal.setTime(endDate);
+            while (startCal.getTimeInMillis() <= endCal.getTimeInMillis()) {
+                attendanceRepository.insertDateByUserId(startCal.getTime(), uid);
+                startCal.add(Calendar.DATE, 1);
+            }
+        }
         return "attendanceSystem";
     }
 
+    /**
+     * 当日の出勤を登録
+     */
     @PostMapping("/attendanceRegister")
     public String attendanceRegister(Model model, HttpSession session) {
-        Attendance attendance = new Attendance();
+
         User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
 
-        Date date = new Date();
+        LocalDate now = LocalDate.now();
+        Date date = Date.from(now.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Attendance attendance = new Attendance();
+        if (attendanceRepository.findByUserAndDate(user, date).size() != 0) {
+            if (attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject()==null).collect(java.util.stream.Collectors.toList()).size() == 0) {
+                model.addAttribute("stat", "attendanceError");
+                return "error";
+            } else {
+                attendance = attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject()==null).collect(java.util.stream.Collectors.toList()).get(0);
+            }
+        } else {
+            attendance.setDate(date);
+        }
 
-        List<Attendance> attList = attendanceRepository.findByUser(user);
-        
-        for (Attendance att : attList) {
-			if (sdf.format(att.getDate()).equals(sdf.format(date)) && att.getProject().equals("新入社員研修")) {
-				model.addAttribute("stat", "attendanceError");
-	            return "error";
-			}
-		}
-
-        attendance.setDate(date);
         attendance.setStartTime("9:00");
         attendance.setEndTime("18:00");
         attendance.setDivision("");
@@ -65,10 +103,13 @@ public class AttendanceController {
         return "loading";
     }
 
+    /**
+     * 登録済みの勤怠情報一覧を表示
+     */
     @GetMapping("/findAllAttendance")
     public String findAllAttendance(Model model, HttpSession session) {
         User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
-        model.addAttribute("attendance", attendanceRepository.findByUserOrderByDateAsc(user));
+        model.addAttribute("attendance", attendanceRepository.findByUserAndProjectIsNotNullOrderByDateAsc(user));
         Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String dateStr = sdf.format(date);
@@ -76,10 +117,14 @@ public class AttendanceController {
         return "findAllAttendance";
     }
 
+    /**
+     *  登録済みの勤怠情報一覧を月別検索して表示
+     * @param month 月
+     */
     @GetMapping("/findByMonth")
     public String findByMonth(String month, Model model, HttpSession session) {
         Integer monInt = Integer.parseInt(month.split("-")[1]);
-        model.addAttribute("attendance", attendanceRepository.findByMMAndUserIdOrderByDateAsc(
+        model.addAttribute("attendance", attendanceRepository.findByMMAndUserIdAndProjectIsNotNullOrderByDateAsc(
                             monInt, Integer.parseInt(session.getAttribute("userId").toString())));
         return "findAllAttendance";
     }

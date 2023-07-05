@@ -25,62 +25,56 @@ public class ManualDeleteController {
 	@Autowired
 	UserRepository userRepository;
 
+	/**
+	 * 登録した勤怠情報の削除画面の表示
+	 */
 	@GetMapping("/manualDelete")
 	public String manualDelete(Model model, HttpSession session) {
 		User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
-		model.addAttribute("attendance", attendanceRepository.findByUserOrderByDateAsc(user));
+		model.addAttribute("attendance", attendanceRepository.findByUserAndProjectIsNotNullOrderByDateAsc(user));
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		String dateStr = sdf.format(date);
 		session.setAttribute("date", dateStr);
 		return "manualDelete";
 	}
-	
-    @GetMapping("/findByDateDescManualDelete")
-    public String findByDateDescManualDelete(Model model, HttpSession session) {
+
+	/**
+	 * 登録した勤怠情報の削除画面を昇順/降順に並べ替えて表示
+	 */
+    @GetMapping("/findByDateManualDelete")
+    public String findByDateAscManualDelete(String sorting, Model model, HttpSession session) {
     	User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
-    	model.addAttribute("attendance", attendanceRepository.findByUserOrderByDateDesc(user));
-    	return "manualDelete";
-    }
-    
-    @GetMapping("/findByDateAscManualDelete")
-    public String findByDateAscManualDelete(Model model, HttpSession session) {
-    	User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
-    	model.addAttribute("attendance", attendanceRepository.findByUserOrderByDateAsc(user));
-    	return "manualDelete";
+    	if (sorting.equals("asc")) {
+    		model.addAttribute("attendance", attendanceRepository.findByUserAndProjectIsNotNullOrderByDateAsc(user));
+        	return "manualDelete";
+    	} else {
+    		model.addAttribute("attendance", attendanceRepository.findByUserAndProjectIsNotNullOrderByDateDesc(user));
+        	return "manualDelete";
+    	}
+    	
     }
 	
-//	@PostMapping("/doManualDelete")
-//	@Transactional(rollbackFor = Exception.class)
-//	public String doManualDelete(String date, String startTime, Model model, HttpSession session) throws ParseException {
-//		User user = userRepository.getReferenceById(Integer.parseInt(session.getAttribute("userId").toString()));
-//		Date dateTemp = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-//		startTime = removeFirstChar(startTime);
-//		
-//		attendanceRepository.deleteByDateAndStartTimeAndUser(dateTemp, startTime, user);
-//		return "redirect:/findAllAttendance";
-//	}
-	
+	/**
+	 * 登録した勤怠情報を月別に検索して表示
+	 * 
+	 * @param month 月
+	 */
 	@GetMapping("/findByMonthManualDelete")
     public String findByMonthManualDelete(String month, Model model, HttpSession session) {
         Integer monInt = Integer.parseInt(month.split("-")[1]);
-        model.addAttribute("attendance", attendanceRepository.findByMMAndUserIdOrderByDateAsc(
+        model.addAttribute("attendance", attendanceRepository.findByMMAndUserIdAndProjectIsNotNullOrderByDateAsc(
                             monInt, Integer.parseInt(session.getAttribute("userId").toString())));
         return "manualDelete";
     }
 	
+	/**
+	 * 登録した勤怠情報を削除
+	 */
 	@PostMapping("/doManualDeleteAjax")
 	@Transactional(rollbackFor = Exception.class)
 	public String doManualDelete1(Integer aId) throws ParseException {
 		attendanceRepository.deleteById(aId);
 		return "redirect:/manualDelete";
 	}
-
-//	//　時刻の入力形式変更 ex) 09:00 >> 9:00
-//	private String removeFirstChar (String str) {
-//		if(str.startsWith("0")) {
-//			str = str.substring(1);
-//		}
-//		return str;
-//	}
 }

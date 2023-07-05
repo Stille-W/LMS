@@ -11,24 +11,17 @@
 	<h2 class="text-secondary">メールテンプレート</h2>
 
 	<div class="mail text-secondary">
-		<span class="attention_bold">
-			※このテンプレートはあくまで一例です。<br />
-			必ずしも正解のテンプレートとは限りません。<br />
-		</span>
-		※またこのテンプレートは社内向けのものです。<br />
-		社外の人に送る際は適宜修正してください。<br />
-
-
 		<p>
-			<form method="get" th:action="@{/mailTemplate}">
-				<!--  
-					送信相手を選択◆
-					<input type="text" name="recipient" list="recipient" placeholder="選択または入力" autocomplete="off"/>
-					<datalist id="recipient">
-					
-					</datalist>
-				-->
-				
+			<span class="attention_bold">
+				※このテンプレートはあくまで一例です。<br />
+				必ずしも正解のテンプレートとは限りません。<br />
+			</span>
+			※またこのテンプレートは社内向けのものです。<br />
+			社外の人に送る際は適宜修正してください。<br />
+		</p>
+
+		<div>
+			<form method="get" th:action="@{/mailTemplate}">				
 				<p>送信相手の名前を入力◆ <input type="text" class="table-lb" name="recipient" /></p>
 				<p>テンプレート内容を選択◆
 					<select name="contents" class="table-lb text-secondary">
@@ -38,19 +31,12 @@
 						<option value="greeting">挨拶と結びのみ</option>
 					</select>
 				</p>
-					
 				<p>
 					<input type="submit" class="btn btn-outline-lb" value="テンプレート出力" />
 				</p>
-				
 			</form>
-		</p>
-
-		<!-- 
-<p><a th:href="@{/addRecipient}">送信相手の名前を登録</a>
- -->
-
-
+		</div>
+		
 	</div>
 </body>
 </html>

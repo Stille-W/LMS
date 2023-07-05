@@ -23,7 +23,7 @@
 			</div>
 	    	<input class="text-secondary table-lb" type="text" name="userName" readonly th:value="${userSigninForm.userName}" th:field="*{userName}"/>
 	        <div class="col">
-	        	FullName
+	        	FullName(本名)
 	        </div>
 	        <input class="text-secondary table-lb" type="text" name="fullName" th:value="${userSigninForm.fullName}" th:field="*{fullName}"/>
 			<p class="error" th:errors="*{fullName}"></p>
@@ -31,7 +31,7 @@
 	        	Password
 	        </div>
 			<div class="col info">
-				パスワードを変更しなくでも、確認の為に、<br>
+				パスワードを変更しない場合も、確認の為に、<br>
 				もう一度パスワードを入力してください。
 			</div>
 	        <input class="text-secondary table-lb" type="password" name="password" th:value="${userSigninForm.password}" th:field="*{password}"/>

@@ -6,83 +6,78 @@
 <title>勤怠情報削除</title>
 </head>
 <body>
-<!-- 	<form method="post" th:action="@{/doManualDelete}"> -->
-<!-- 		日時◆<input type="date" name="date" /> -->
-<!-- 		開始時間◆<input type="time" value="09:00" name="startTime" /> -->
+	<h2 class="text-secondary">勤怠情報削除</h2>
+	<div class="list text-secondary">
+		<div class="searchBtn_a">
+			<form th:action="@{/findByMonthManualDelete}" method="get" style="display: inline">
+				月別検索◆<input type="month" class="text-secondary table-lb"
+					th:value="${session.date}" name="month" />
+					<input type="submit" class="btn btn-outline-lb btn-sm" value="検索" />
+			</form>
+			
+			<div class="searchBtn_b" style="display: inline">
+				<form th:action="@{/findByDateManualDelete}" method="get">
+					全情報並べ替え◆&#8195;
+					<label>
+						<input type="radio" name="sorting" value="asc" checked="checked"/>昇順
+					</label>
+					<label>
+						<input type="radio" name="sorting" value="desc" />降順
+					</label>
+					<input type="submit" class="btn btn-outline-lb btn-sm" value="検索" />&#0009;
+				</form>
+			</div>
+		</div>
 		
-<!-- 		<input type="submit"value="削除" /> -->
-<!-- 	</form> -->
-	
-<!-- 	<p> -->
-<h2 class="text-secondary">勤怠情報削除</h2>
-<div class="list text-secondary">
-	
-	<div class="searchBtn_a">
-	<form th:action="@{/findByMonthManualDelete}" method="get" style="display: inline">
-			月別検索◆<input type="month" class="text-secondary table-lb" th:value="${session.date}" name="month" />
-			<input type="submit" class="btn btn-outline-lb" value="検索"/>&#0009;
-	</form>
-	
-	<div class="searchBtn_b" style="display: inline">
-	
-	<form th:action="@{/findByDateAscManualDelete}" method="get" style="display: inline">
-			<input type="submit" class="btn btn-outline-lb" value="昇順"/>
-	</form>
-	
-	<form th:action="@{/findByDateDescManualDelete}" method="get" style="display: inline">
-			<input type="submit" class="btn btn-outline-lb" value="降順"/>
-	</form>
-
-	</div>
-	</div>
-	
 		<div id="table">
-		<table border=1 class="table table-lb text-secondary table-hover border border-pink">
-			<tr>
-				<th colspan="2">日付</th>
-				<th>開始</th>
-				<th>終了</th>
-				<th>区分</th>
-				<th>勤務時間</th>
-				<th>プロジェクト</th>
-				<th>場所</th>
-				<th>備考</th>
-				<th>削除</th>
-			</tr>
-			<tr th:each="attendance: ${attendance}">
-				<td th:text="${#dates.format(attendance.date, 'MM/dd')}"></td>
-				<td th:text="${#dates.format(attendance.date, 'E')}"></td>
-				<td th:text="${attendance.startTime}"></td>
-				<td th:text="${attendance.endTime}"></td>
-				<td th:text="${attendance.division}"></td>
-				<td th:text="${attendance.workHours}"></td>
-				<td th:text="${attendance.project}"></td>
-				<td th:text="${attendance.place}"></td>
-				<td th:text="${attendance.remarks}"></td>
-				<!--  
-				<td><button th:onclick="del(this.getAttribute('delId'))" type="button"
-						class="btn btn-outline-lb" th:delId="${attendance.id}" th:text="削除"></button></td>
-			-->
-				<td><button th:onclick="del(this.getAttribute('delId'))" type="button"
-						class="btn btn-outline-secondary" th:delId="${attendance.id}" >
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-								<path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-								<path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+			<table border=1
+				class="table table-lb text-secondary table-hover border border-pink">
+				<tr>
+					<th colspan="2">日付</th>
+					<th>開始</th>
+					<th>終了</th>
+					<th>区分</th>
+					<th>勤務時間</th>
+					<th>プロジェクト</th>
+					<th>場所</th>
+					<th>備考</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="attendance: ${attendance}">
+					<td th:text="${#dates.format(attendance.date, 'MM/dd')}"></td>
+					<td th:text="${#dates.format(attendance.date, 'E')}"></td>
+					<td th:text="${attendance.startTime}"></td>
+					<td th:text="${attendance.endTime}"></td>
+					<td th:text="${attendance.division}"></td>
+					<td th:text="${attendance.workHours}"></td>
+					<td th:text="${attendance.project}"></td>
+					<td th:text="${attendance.place}"></td>
+					<td th:text="${attendance.remarks}"></td>
+					<td><button th:onclick="del(this.getAttribute('delId'))"
+							type="button" class="btn btn-outline-secondary"
+							th:delId="${attendance.id}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+								fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+								<path fill-rule="evenodd"
+									d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+								<path fill-rule="evenodd"
+									d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
 							</svg>
-				</button></td>
-			</tr>
-		</table>
-	</div>
-	
-	<p class="return">
-		<a th:href="@{/attendanceSystem}" class="icon-link link-secondary">
-			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-  				<path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+						</button></td>
+				</tr>
+			</table>
+		</div>
+		<p class="return">
+			<a th:href="@{/attendanceSystem}" class="icon-link link-secondary">
+				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+					fill="currentColor" class="bi bi-arrow-left-circle-fill"
+					viewBox="0 0 16 16">
+  				<path
+						d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
 			</svg>
-		</a>
-	</p>
-</div>
-
+			</a>
+		</p>
+	</div>
 	<script th:src="@{/js/manuallDel.js}" type="text/javascript"></script>
 </body>
 </html>

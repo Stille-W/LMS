@@ -20,25 +20,27 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-1">
 					<li><a class="nav-link" aria-current="page"
 						th:href="@{/dailyReport}">日報</a></li>
-					<li><a class="nav-link" href="/goodsunlms/mail">メール</a></li>
-
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle"
-						href="http://localhost:8080/goodsunlms/attendanceSystem"
-						id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false"> 勤怠</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" th:href="@{/attendanceSystem}">勤怠メニュー</a></li>
-							<li><a class="dropdown-item" th:href="@{/manualInput}">手動入力</a></li>
-							<li><a class="dropdown-item" th:href="@{/findAllAttendance}">一覧</a></li>
-							<li><a class="dropdown-item" th:href="@{/manualDelete}">削除</a></li>
-						</ul></li>
+					<li><a class="nav-link" href="/goodsunlms/mail">メール</a></li>&emsp;
+					<div class="btn-group">
+						<button type="button" class="btn btn-outline-gray"
+							th:onclick="|location.href='@{/attendanceSystem}'|">勤怠</button>
+						<button type="button"
+							class="btn btn-outline-gray dropdown-toggle dropdown-toggle-split"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="visually-hidden">Attendance Dropdown</span>
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" th:href="@{/manualInput}">手動入力</a> <a
+								class="dropdown-item" th:href="@{/findAllAttendance}">一覧</a> <a
+								class="dropdown-item" th:href="@{/manualDelete}">削除</a>
+						</div>
+					</div>
 				</ul>
 				<div class="header-right text-secondary">
-					ユーザー名：<a class="link-user" th:href="@{/editUser}"><span id="userName" th:text="${session.fullName}">
-								</span></a>&emsp;
+					ユーザー名：<a class="link-user" th:href="@{/editUser}"><span
+						id="userName" th:text="${session.fullName}"> </span></a>&emsp;
 				</div>
-<!--				<a th:href="@{/editUser}" class="btn btn-outline-lb">設定</a>&emsp;-->
+				<!--				<a th:href="@{/editUser}" class="btn btn-outline-lb">設定</a>&emsp;-->
 				<a th:href="@{/logout}" class="btn btn-outline-lb">ログアウト</a>
 			</div>
 		</nav>

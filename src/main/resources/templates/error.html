@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		if($("input").val()=="excelUsed"){
-			alert("エラーが出ます。\n もしかしてexcelファイルは別のプロセスが使用中ですか？");
+			alert("エラーが発生しました。\n もしかしてexcelファイルを別のプロセスが使用中ですか？");
 			window.location.href = "./select";
 		} else if($("input").val()== "attendanceError") {
 			alert("登録済みです");
@@ -18,7 +18,7 @@
 			window.location.replace("./mail");
 		}
 		else{
-			alert("エラーが出ます。\n"+$("input").val());
+			alert("エラーが発生しました。\n"+$("input").val());
 			window.location.href = "./index";
 		}	
 		

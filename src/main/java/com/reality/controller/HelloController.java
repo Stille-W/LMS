@@ -7,8 +7,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
+
+//@RestController
 public class HelloController {
+
+	public static void main(String[] args) {
+		LocalDate now = LocalDate.now();
+		LocalDate first = now.with(TemporalAdjusters.firstDayOfMonth());
+		LocalDate last = now.with(TemporalAdjusters.lastDayOfMonth());
+		System.out.println(now+","+first+","+last);
+		Date firstD = Date.from(first.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		System.out.println(firstD);
+	}
+
 	@RequestMapping("/")
 	public String hello(ServletRequest request, ServletResponse response) {
 		HttpServletRequest req = (HttpServletRequest) request;

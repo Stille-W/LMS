@@ -1,14 +1,13 @@
 package com.reality.util;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import com.reality.repository.AttendanceRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -16,15 +15,15 @@ import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-
-import com.reality.entity.Attendance;
-
-
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.reality.entity.Attendance;
+import com.reality.repository.AttendanceRepository;
+
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class Form2ExcelMM {
@@ -36,6 +35,11 @@ public class Form2ExcelMM {
 	XSSFSheet ws;
 	boolean isCal = false;
 
+	/**
+	 * 月報生成
+	 * 
+	 * @param month 月
+	 */
 	@GetMapping("/genMonth")
 	public void buildExcel(Integer month, HttpSession session, HttpServletResponse response) throws Exception {
 
@@ -54,14 +58,17 @@ public class Form2ExcelMM {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
 		SimpleDateFormat sdfE = new SimpleDateFormat("E", Locale.JAPANESE);
-		XSSFCreationHelper createHelper = wb.getCreationHelper();	
+		SimpleDateFormat MM = new SimpleDateFormat("MM");
+		SimpleDateFormat dd = new SimpleDateFormat("dd");
+		XSSFCreationHelper createHelper = wb.getCreationHelper();
+		Calendar cal = Calendar.getInstance();
 
 		String yyyy = date.split("/")[0];
 		String mm = Integer.parseInt(date.split("/")[1])<10?"0"+date.split("/")[1]:date.split("/")[1];
-			
+		
 		// Cell処理...
 		int row_pos = 4;
-		
+	
 		XSSFCellStyle wrapStyle = wb.createCellStyle();
 		wrapStyle.setWrapText(true);
 		// 日付
@@ -78,15 +85,20 @@ public class Form2ExcelMM {
 			this.setValue(row_pos, col_pos++, sdf.format(list.get(i).getDate()));
 			this.setValue(row_pos, col_pos++, sdfE.format(list.get(i).getDate()));
 			// 開始終了
-			this.setValue(row_pos, col_pos++, list.get(i).getStartTime());			
+			this.setValue(row_pos, col_pos++, list.get(i).getStartTime());
 			this.setValue(row_pos, col_pos++, list.get(i).getEndTime());
-			
+
 			// 区分
 			this.setValue(row_pos, col_pos++, list.get(i).getDivision());
 			// 時間
 //			System.out.println("row: "+row_pos+";cell: "+col_pos);
 			ws.getRow(row_pos).getCell(col_pos).getCellStyle().setDataFormat(createHelper.createDataFormat().getFormat("[h]:mm"));
-			ws.getRow(row_pos).getCell(col_pos++).setCellValue(DateUtil.convertTime(list.get(i).getWorkHours()));		
+			System.out.println(list.get(i).getWorkHours()+":"+list.get(i).getDate());
+			if (list.get(i).getWorkHours()==null){
+				this.setValue(row_pos, col_pos++, "");
+			} else {
+				ws.getRow(row_pos).getCell(col_pos++).setCellValue(DateUtil.convertTime(list.get(i).getWorkHours()));
+			}
 			// プロジェクト
 			this.setValue(row_pos, col_pos++, list.get(i).getProject());
 			// 作業場所
@@ -95,6 +107,7 @@ public class Form2ExcelMM {
 			this.setValue(row_pos, col_pos++, list.get(i).getRemarks());
 
 			row_pos++;
+
 		}
 		
 		if (isCal) {
@@ -136,6 +149,12 @@ public class Form2ExcelMM {
 		System.out.println("JOB_DONE");
 	}
 	
+	/**
+	 * 入力内容をExcelファイルに出力する
+	 * 
+	 * @param row_pos 行の位置指定（0～）
+	 * @param col_pos 列の位置指定（0～）
+	 */
 	private void setValue(int row_pos, int col_pos, Object value) throws Exception {
 		// create and set cell
 		if (ws.getRow(row_pos) == null) {

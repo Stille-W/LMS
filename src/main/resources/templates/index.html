@@ -12,7 +12,7 @@
 		<form method="post" th:action="@{/login}" th:object="${loginForm}">
 		<div class="form">
 			<p>UserName:</p>
-			<a th:href="@{/adduser}" ><div class="new">新規登録</div></a>
+			<a th:href="@{/adduser}" ><span class="new">新規登録</span></a>
 			<input type="text" th:field="*{userName}"/>
 			<span class="error" th:errors="*{userName}"></span>
 			<p>Password:</p>

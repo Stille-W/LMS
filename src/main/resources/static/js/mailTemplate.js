@@ -26,10 +26,14 @@ $('.copy').click(function(){
 function toSendMail() {
     let tid = $(".select").children("p.bg-lb").attr("id");
     let teid = $(".select").children("div").attr("id");
-
-    let tcont = $('#' + tid).text().split(":")[1].trim();
+	let tcont;
+    if (typeof(tid)=='undefined') {
+		tcont = "";
+	}else{
+		tcont =$('#' + tid).text().split(":")[1].trim()
+	}
     let tecont = $('#' + teid).html();
-    tecont = tecont.replace(/<span>|<\/span>|<\/div>/ig, "").replace(/<br>|<div>/ig, "%0A");
+    tecont = tecont.replace(/<span>|<\/span>|<\/div>|&nbsp;/ig, "").replace(/<br>|<div>/ig, "%0A");
 //    console.log(tecont);
 
     window.location.href = "./sendMail?title="+tcont+"&text="+tecont;

@@ -23,6 +23,14 @@ public class ComplaintsController {
 	@Autowired
 	UserRepository userRepository;
 	
+	/**
+	 * 当日の愚痴相談会の登録
+	 * 
+	 * @param startTime 開始時間
+	 * @param endTime 終了時間
+	 * @param place 開催場所
+	 * @param remarks 備考（担当メンター）
+	 */
 	@PostMapping("/complaints")
 	public String complaints(Model model, HttpSession session, String startTime, String endTime, String place, String remarks) {
 		Attendance attendance = new Attendance();

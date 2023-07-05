@@ -20,11 +20,17 @@ public class SessionController {
 	@Autowired
 	UserRepository userRepository;
 	
+	/**
+	 * ログイン画面表示
+	 */
 	@GetMapping("/index")
 	public String index(@ModelAttribute LoginForm form) {
 		return "index";
 	}
 	
+	/**
+	 * ログイン実行
+	 */
 	@PostMapping("/login")
 	public String doLogin(@Valid @ModelAttribute LoginForm form, BindingResult result, HttpSession session, Model model) {
 		if (result.hasErrors()) {
@@ -45,17 +51,26 @@ public class SessionController {
 		}
 	}
 	
+	/**
+	 * ローディング画面表示
+	 */
 	@GetMapping("/loading")
 	public String loading() {
 		return "loading";
 	}
 	
+	/**
+	 * ログアウト実行
+	 */
 	@GetMapping("/logout")
 	public String logout(@ModelAttribute LoginForm form, HttpSession session) {
 		session.invalidate();
 		return "index";
 	}
 
+	/**
+	 * ログインをせずに内部にアクセスしたときにエラーメッセージを表示する
+	 */
 	@GetMapping("/login")
 	public String login() {
         return "login";

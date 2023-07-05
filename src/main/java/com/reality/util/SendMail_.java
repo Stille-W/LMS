@@ -4,12 +4,10 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -17,16 +15,18 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
-import java.security.*;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Properties;
 
-@Controller
-public class SendMail {
+//@Controller
+public class SendMail_ {
 
 //    protect static final KeyPair keyPair = initKey();
 
-    @GetMapping("/sendMail")
+//    @GetMapping("/sendMail")
     public String sendMail(String title, String text, Model model) throws NoSuchAlgorithmException {
         model.addAttribute("title", title);
         model.addAttribute("text", text);

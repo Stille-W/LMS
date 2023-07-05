@@ -1,32 +1,22 @@
 package com.reality.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.filechooser.FileSystemView;
-
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reality.form.DailyReportForm;
 
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class Form2Excel {
@@ -45,13 +35,9 @@ public class Form2Excel {
 	XSSFWorkbook wb;
 	XSSFSheet ws;
 	
-//	private DailyReportForm dailyReportForms = new DailyReportForm();
-	
-//	public void runForm2Excel(DailyReportForm drf) throws Exception {
-//		doExcel(drf);
-//		buildExcel();
-//	}
-	
+	/**
+	 * 日報Excelファイル生成
+	 */
 	@PostMapping("/genDaily")
 	public void buildExcel(DailyReportForm dailyReportForms, HttpServletResponse response) throws Exception {
 		doExcel(dailyReportForms);
@@ -115,26 +101,28 @@ public class Form2Excel {
 		wb.write(os);
 		os.flush();
 		os.close();
-		
-		
-//		wb.write(stream);
-//		stream.close();
 
 		wb.close();
 
 		System.out.println("JOB_DONE");
 	}
 	
+	/**
+	 * 日報のフォームの内容を整理
+	 */
 	private void doExcel(DailyReportForm dailyReportForms) throws IOException {
 		// form情報整え
 		
 		dailyReportForms.setDoneThings(dailyReportForms.getDoneThings());
 		dailyReportForms.setReflection(dailyReportForms.getReflection().replaceAll("(.{40})", "$1\n"));
-		
-//		dailyReportForms.getDoneThingsList().forEach(s->{System.out.println(s.getThings());});
-				
 	}
 	
+	/**
+	 * 入力内容をExcelファイルに出力する
+	 * 
+	 * @param row_pos 行の位置指定（0～）
+	 * @param col_pos 列の位置指定（0～）
+	 */
 	private void setValue(int row_pos, int col_pos, Object value) throws Exception {
 		// create and set cell
 		if (ws.getRow(row_pos) == null) {
@@ -158,7 +146,6 @@ public class Form2Excel {
 			return;
 		}
 		String className = value.getClass().getName();
-//		System.out.println(value + " is " + className);
 
 		if (className == "java.lang.String") {
 			ws.getRow(row_pos).getCell(col_pos).setCellValue((String) value);

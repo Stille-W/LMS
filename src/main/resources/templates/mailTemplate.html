@@ -37,7 +37,7 @@
 	</div>
 
 	<!-- リンク添付 -->
-	<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="mail select">
+	<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="select">
 		<p id="title_docSubmit_link" class="bg-lb rounded p-3 border border-lb border border-2">
 			件名:<br/>
 			●●ご確認のお願い
@@ -83,7 +83,7 @@
 </div>
 
 	<!-- 挨拶と結びのみ -->
-	<div th:if="${#strings.equals(contents, 'greeting')}" class="select">
+	<div th:if="${#strings.equals(contents, 'greeting')}" class="select mail">
 
 <div id="text_greeting" class="bg-rose rounded p-3 border border-rose border border-3">
 <span th:text="${recipient}"></span>さん<br/>
