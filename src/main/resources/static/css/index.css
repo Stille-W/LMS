@@ -82,6 +82,7 @@ p {
   width:0%;
   background: #666666;
   margin-bottom: 3px;
+  margin-left: 10px;
   transition: all 0.3s;
 }
 

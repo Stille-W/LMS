@@ -8,7 +8,7 @@
 <body>
 	<header id="header" th:fragment="layout-header">
 		<!-- 	ナビゲーションバー -->
-		<nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<nav class="navbar navbar-expand-sm navbar-light bg-light nav-tabs mb-3" id="nav-tab">
 			<div class="container-fluid">
 				<a class="navbar-brand" th:href="@{/select}">メニュー</a>
 				<button type="button" class="navbar-toggler"
@@ -35,7 +35,23 @@
 								class="dropdown-item" th:href="@{/manualDelete}">削除</a>
 						</div>
 					</div>
+					
+					<div class="btn-group">
+						<button type="button" class="btn btn-outline-gray">theme</button>
+						<button type="button" class="btn btn-outline-gray dropdown-toggle dropdown-toggle-split"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="visually-hidden">Theme Dropdown</span>
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" id="girly" href="javascript:changeStyleSheet('./css/layout.css');">girly</a>
+							<a class="dropdown-item" id="dusty" href="javascript:changeStyleSheet('./css/layoutThemeDusty.css');">dusty</a>
+							<a class="dropdown-item" id="dark" href="javascript:changeStyleSheet('./css/layoutThemeDark.css');">dark</a>
+							<a class="dropdown-item" id="fireworks" href="javascript:changeStyleSheet('./css/layoutThemeFireworks.css');">fireworks</a>
+						</div>
+					</div>
+					
 				</ul>
+				
 				<div class="header-right text-secondary">
 					ユーザー名：<a class="link-user" th:href="@{/editUser}"><span
 						id="userName" th:text="${session.fullName}"> </span></a>&emsp;

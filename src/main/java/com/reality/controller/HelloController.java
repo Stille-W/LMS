@@ -13,7 +13,7 @@ import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
-//@RestController
+@RestController
 public class HelloController {
 
 	public static void main(String[] args) {

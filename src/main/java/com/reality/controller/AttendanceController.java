@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,13 +78,12 @@ public class AttendanceController {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Attendance attendance = new Attendance();
-        if (attendanceRepository.findByUserAndDate(user, date).size() != 0) {
-            if (attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject()==null).collect(java.util.stream.Collectors.toList()).size() == 0) {
-                model.addAttribute("stat", "attendanceError");
-                return "error";
-            } else {
-                attendance = attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject()==null).collect(java.util.stream.Collectors.toList()).get(0);
-            }
+
+        if (attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject()==null).collect(Collectors.toList()).size() != 0) {
+            attendance = attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject()==null).collect(Collectors.toList()).get(0);
+        } else if (attendanceRepository.findByUserAndDate(user, date).stream().filter(a->a.getProject().equals("新入社員研修")).collect(Collectors.toList()).size() != 0) {
+            model.addAttribute("stat", "attendanceError");
+            return "error";
         } else {
             attendance.setDate(date);
         }
@@ -128,5 +128,6 @@ public class AttendanceController {
                             monInt, Integer.parseInt(session.getAttribute("userId").toString())));
         return "findAllAttendance";
     }
+
 
 }
