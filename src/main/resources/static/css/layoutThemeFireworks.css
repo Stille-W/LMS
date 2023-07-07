@@ -8,6 +8,10 @@
 	color: #f5ecf4!important;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        background-color: #df48669c;
+}
+
 .btn-outline-gray{
 	color: #f5ecf4!important;
 }

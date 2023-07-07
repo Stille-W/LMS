@@ -8,113 +8,100 @@
 
 </head>
 <body>
-<h2 class="text-secondary">メール本文</h2>
-<div class="content">
-	<!-- 欠勤連絡 -->
-	<div th:if="${#strings.equals(contents, 'absence')}" class="select">
+	<h2 class="text-secondary">メール本文</h2>
+	<div class="content">
+		<!-- 欠勤連絡 -->
+		<div th:if="${#strings.equals(contents, 'absence')}" class="select">
 
-		<p class="attention">※当日の欠勤連絡は電話でお伝えする方が確実です</p>
+			<p class="attention">※当日の欠勤連絡は電話でお伝えする方が確実です</p>
 
-		<p id="title_absence" class="bg-lb rounded p-3 border border-lb border border-2">
-			件名:<br/>
-			【勤怠連絡】体調不良による欠勤のご連絡
-		</p>
+			<p id="title_absence"
+				class="bg-lb rounded p-3 border border-lb border border-2">
+				件名:<br /> 【勤怠連絡】体調不良による欠勤のご連絡
+			</p>
 
-<div id="text_absence" class="bg-rose rounded p-3 border border-rose border border-3">
-<span th:text="${recipient}"></span>さん<br/>
-<br/>
-おはようございます。<span th:text="${session.fullName}"></span>です。<br/>
-<br/>
-昨晩から体調が優れず、現在も発熱があるため、<br/>
-静養のために欠勤させていただきたくご連絡差し上げました。<br/>
-<br/>
-ご迷惑をおかけして大変申し訳ございません。<br/>
-後ほど詳細についてご連絡いたします。<br/>
-よろしくお願いいたします。<br/>
-<br/>
-<div th:text="${session.fullName}"></div>
-</div>
-	</div>
+			<div id="text_absence"
+				class="bg-rose rounded p-3 border border-rose border border-3">
+				<span th:text="${recipient}"></span>さん<br /> <br /> おはようございます。<span
+					th:text="${session.fullName}"></span>です。<br /> <br />
+				昨晩から体調が優れず、現在も発熱があるため、<br /> 静養のために欠勤させていただきたくご連絡差し上げました。<br /> <br />
+				ご迷惑をおかけして大変申し訳ございません。<br /> 後ほど詳細についてご連絡いたします。<br /> よろしくお願いいたします。<br />
+				<br />
+				<div th:text="${session.fullName}"></div>
+			</div>
+		</div>
 
-	<!-- リンク添付 -->
-	<div th:if="${#strings.equals(contents, 'docSubmit_link')}" class="select">
-		<p id="title_docSubmit_link" class="bg-lb rounded p-3 border border-lb border border-2">
-			件名:<br/>
-			●●ご確認のお願い
-		</p>
+		<!-- リンク添付 -->
+		<div th:if="${#strings.equals(contents, 'docSubmit_link')}"
+			class="select">
+			<p id="title_docSubmit_link"
+				class="bg-lb rounded p-3 border border-lb border border-2">
+				件名:<br /> ●●ご確認のお願い
+			</p>
 
-<div id="text_docSubmit_link" class="bg-rose rounded p-3 border border-rose border border-3">
-<span th:text="${recipient}"></span>さん<br/>
-<br/>
-お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
-●●についてご確認をお願いしたくご連絡いたしました。<br/>
-<br/>
--------------------------------------<br/>
-　●リンクがある場合は添付●<br/>
--------------------------------------<br/>
-<br/>
-お忙しいところ大変恐縮ですが、<br/>
-ご確認のほどよろしくお願いいたします。<br/>
-<br/>
-<div th:text="${session.fullName}"></div>
-</div>
-</div>
+			<div id="text_docSubmit_link"
+				class="bg-rose rounded p-3 border border-rose border border-3">
+				<span th:text="${recipient}"></span>さん<br /> <br /> お疲れ様です。<span
+					th:text="${session.fullName}"></span>です。<br />
+				●●についてご確認をお願いしたくご連絡いたしました。<br /> <br />
+				-------------------------------------<br /> ●リンクがある場合は添付●<br />
+				-------------------------------------<br /> <br /> お忙しいところ大変恐縮ですが、<br />
+				ご確認のほどよろしくお願いいたします。<br /> <br />
+				<div th:text="${session.fullName}"></div>
+			</div>
+		</div>
 
-	<!-- ファイル添付 -->
-	<div th:if="${#strings.equals(contents, 'docSubmit_att')}" class="select">
-		<p id="title_docSubmit_att" class="bg-lb rounded p-3 border border-lb border border-2">
-			件名:<br/>
-			●●ご確認のお願い
-		</p>
+		<!-- ファイル添付 -->
+		<div th:if="${#strings.equals(contents, 'docSubmit_att')}"
+			class="select">
+			<p id="title_docSubmit_att"
+				class="bg-lb rounded p-3 border border-lb border border-2">
+				件名:<br /> ●●ご確認のお願い
+			</p>
 
-<div id="text_docSubmit_att" class="bg-rose rounded p-3 border border-rose border border-3">
-<span th:text="${recipient}"></span>さん<br/>
-<br/>
-お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
-●●についてご確認をお願いしたくご連絡いたしました。<br/>
-<br/>
-本メールに当該のファイルを添付しております。<br/>
-<br/>
-お忙しいところ大変恐縮ですが、<br/>
-ご確認のほどよろしくお願いいたします。<br/>
-<br/>
-<div th:text="${session.fullName}"></div>
-</div>
-</div>
+			<div id="text_docSubmit_att"
+				class="bg-rose rounded p-3 border border-rose border border-3">
+				<span th:text="${recipient}"></span>さん<br /> <br /> お疲れ様です。<span
+					th:text="${session.fullName}"></span>です。<br />
+				●●についてご確認をお願いしたくご連絡いたしました。<br /> <br /> 本メールに当該のファイルを添付しております。<br />
+				<br /> お忙しいところ大変恐縮ですが、<br /> ご確認のほどよろしくお願いいたします。<br /> <br />
+				<div th:text="${session.fullName}"></div>
+			</div>
+		</div>
 
-	<!-- 挨拶と結びのみ -->
-	<div th:if="${#strings.equals(contents, 'greeting')}" class="select mail">
+		<!-- 挨拶と結びのみ -->
+		<div th:if="${#strings.equals(contents, 'greeting')}"
+			class="select mail">
 
-<div id="text_greeting" class="bg-rose rounded p-3 border border-rose border border-3">
-<span th:text="${recipient}"></span>さん<br/>
-<br/>
-お疲れ様です。<span th:text="${session.fullName}"></span>です。<br/>
-●●について●●したくご連絡いたしました。<br/>
-<br/>
-------<br/>
-&nbsp;本文<br/>
-------<br/>
-<br/>
-お手数をお掛けして大変恐縮ですが、<br/>
-よろしくお願いいたします。<br/>
-<br/>
-<div th:text="${session.fullName}"></div>
-</div>
-</div>
+			<div id="text_greeting"
+				class="bg-rose rounded p-3 border border-rose border border-3">
+				<span th:text="${recipient}"></span>さん<br /> <br /> お疲れ様です。<span
+					th:text="${session.fullName}"></span>です。<br />
+				●●について●●したくご連絡いたしました。<br /> <br /> ------<br /> &nbsp;本文<br />
+				------<br /> <br /> お手数をお掛けして大変恐縮ですが、<br /> よろしくお願いいたします。<br /> <br />
+				<div th:text="${session.fullName}"></div>
+			</div>
+		</div>
 
-	<div class="copy_button">
-		<button type="button" id="copy_absence" class="copy btn btn-outline-pink">本文をコピー</button>
-		<button type="button" id="to_sendMail" class="btn btn-outline-pink" th:onclick="toSendMail()">送信へ</button>
-	</div>
+		<div class="copy_button">
+			<button type="button" id="copy_absence"
+				class="copy btn btn-outline-pink">本文をコピー</button>
+			<button type="button" id="to_sendMail" class="btn btn-outline-pink"
+				th:onclick="toSendMail()">送信へ</button>
+		</div>
 
-<p class="return">
-			<a th:href="@{/mail}" class="icon-link link-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+		<p class="return">
+			<a th:href="@{/mail}" class="icon-link link-secondary"><svg
+					xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+					fill="currentColor" class="bi bi-arrow-left-circle-fill"
+					viewBox="0 0 16 16">
+  <path
+						d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
 </svg></a>
 		</p>
-</div>
+	</div>
 
-<script th:src="@{/js/mailTemplate.js}" type="text/javascript"></script>
+	<script th:src="@{/js/mailTemplate.js}" type="text/javascript"></script>
 
 </body>
 </html>

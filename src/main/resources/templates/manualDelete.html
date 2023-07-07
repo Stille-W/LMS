@@ -8,27 +8,24 @@
 <body>
 	<h2 class="text-secondary">勤怠情報削除</h2>
 	<div class="list text-secondary">
-		<div class="searchBtn_a">
-			<form th:action="@{/findByMonthManualDelete}" method="get" style="display: inline">
-				月別検索◆<input type="month" class="text-secondary table-lb"
-					th:value="${session.date}" name="month" />
-					<input type="submit" class="btn btn-outline-lb btn-sm" value="検索" />
+		<div class="searchBtn_a" style="display: flex">
+			<form th:action="@{/findByMonthManualDelete}" method="get"
+				style="display: inline">
+				月別検索◆&nbsp;<input type="month" class="text-secondary table-lb"
+					th:value="${session.date}" name="month" /> <input type="submit"
+					class="btn btn-outline-lb btn-sm" value="検索" />
 			</form>
-			
+			&emsp;
+
 			<div class="searchBtn_b" style="display: inline">
 				<form th:action="@{/findByDateManualDelete}" method="get">
-					全情報並べ替え◆&#8195;
-					<label>
-						<input type="radio" name="sorting" value="asc" checked="checked"/>昇順
-					</label>
-					<label>
-						<input type="radio" name="sorting" value="desc" />降順
-					</label>
-					<input type="submit" class="btn btn-outline-lb btn-sm" value="検索" />&#0009;
+					全情報並べ替え◆&nbsp; <label> <input type="radio" name="sorting"
+						value="asc" checked="checked" />昇順
+					</label> <label> <input type="radio" name="sorting" value="desc" />降順
+					</label> <input type="submit" class="btn btn-outline-lb btn-sm" value="検索" />&#0009;
 				</form>
 			</div>
 		</div>
-		
 		<div id="table">
 			<table border=1
 				class="table table-lb text-secondary table-hover border border-pink">

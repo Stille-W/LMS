@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: white;
+        background-color: #70a3e7b3;
+}
+
 .bg-light {
 	background-color: #C0DBEA!important;
 }

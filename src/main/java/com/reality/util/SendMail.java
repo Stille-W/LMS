@@ -28,7 +28,7 @@ public class SendMail {
 
     @GetMapping("/sendMail")
     public String sendMail(String title, String text, Model model) throws NoSuchAlgorithmException {
-        model.addAttribute("title", title);
+        model.addAttribute("etitle", title);
         model.addAttribute("text", text);
         return "sendMail";
     }
