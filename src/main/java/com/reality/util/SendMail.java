@@ -26,7 +26,7 @@ public class SendMail {
 
 //    protect static final KeyPair keyPair = initKey();
 
-    @GetMapping("/sendMail")
+    @GetMapping("/sendmail")
     public String sendMail(String title, String text, Model model) throws NoSuchAlgorithmException {
         model.addAttribute("etitle", title);
         model.addAttribute("text", text);

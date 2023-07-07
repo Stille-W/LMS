@@ -36,7 +36,7 @@ function toSendMail() {
     tecont = tecont.replace(/<span>|<\/span>|<\/div>|&nbsp;/ig, "").replace(/<br>|<div>/ig, "%0A");
 //    console.log(tecont);
 
-    window.location.href = "./sendMail?title="+tcont+"&text="+tecont;
+    window.location.href = "./sendmail?title="+tcont+"&text="+tecont;
 
 //    window.location.href = "mailto:?"+sendTo+"subject="+tcont+"&body="+tecont;
 
