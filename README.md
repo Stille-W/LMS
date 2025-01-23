@@ -7,4 +7,4 @@ https://goodsunlms.azurewebsites.net/goodsunlms/index
 - springboot
 - thymleaf
 - jdbc
-- MSSQL
+- MvSQL
