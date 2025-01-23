@@ -5,6 +5,6 @@ https://goodsunlms.azurewebsites.net/goodsunlms/index
 
 - java 8
 - springboot
-- thymleaf
-- jdbc
+- thymeleaf
+- JPA
 - MvSQL
